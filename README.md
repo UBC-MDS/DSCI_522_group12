@@ -10,6 +10,12 @@ Loyal customers often promote the airline through word-of-mouth or positive revi
 Thus, the reasons to conduct the project are many. The main question is: <b>can we accurately predict the customer satisfaction from the information we have? </b>
 
 The dataset we use to answer this question was sourced in Kaggle, posted by [@teejmahal20](https://www.kaggle.com/teejmahal20) (TJ Klein). It is important to note that the dataset was originally posted by [@johndddddd](https://www.kaggle.com/datasets/johndddddd/customer-satisfaction), which is then modified and cleaned by [@teejmahal20](https://www.kaggle.com/teejmahal20). The full dataset can be found [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction).
+# Report
+
+The final report can be found
+
+# Dependencies
+
 
 # LICENSE
 
