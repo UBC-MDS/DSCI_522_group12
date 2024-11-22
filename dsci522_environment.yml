@@ -1,4 +1,4 @@
-name: dsci522
+name: dsci522-airline-pred
 channels:
   - conda-forge
 dependencies:
