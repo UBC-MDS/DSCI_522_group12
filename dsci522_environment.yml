@@ -1,9 +1,13 @@
 name: dsci522-airline-pred
 channels:
   - conda-forge
+  - defaults
 dependencies:
-  - python=3.9
+  - ipykernel
+  - matplotlib
   - numpy=1.22
   - pandas=1.3
-  - matplotlib
-  - ipykernel
+  - python=3.9
+  - category_encoders
+  - scikit-learn
+  - seaborn
