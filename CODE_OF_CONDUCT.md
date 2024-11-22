@@ -28,6 +28,9 @@ If you encounter behavior that violates this Code of Conduct:
 - First, consider resolving the issue respectfully through direct communication.
 - If unresolved, report it to the project maintainers by any of these emails:  
 hrayrmuradyan20@gmail.com,  
+az.p.ctc@gmail.com,
+jessicayujiajia@gmail.com,
+schisom@student.ubc.ca.
 
 ## Enforcement
 Violations of this Code of Conduct will be reviewed and addressed by project maintainers. Actions may include warnings, removal from the project, or other appropriate measures.
