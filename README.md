@@ -12,7 +12,7 @@ Thus, the reasons to conduct the project are many. The main question is: <b>can 
 The dataset we use to answer this question was sourced in Kaggle, posted by [@teejmahal20](https://www.kaggle.com/teejmahal20) (TJ Klein). It is important to note that the dataset was originally posted by [@johndddddd](https://www.kaggle.com/datasets/johndddddd/customer-satisfaction), which is then modified and cleaned by [@teejmahal20](https://www.kaggle.com/teejmahal20). The full dataset can be found [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction).
 # Report
 
-The final report can be found: [here](https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/notebooks/airline_passenger_satisfaction_predictor.ipynb](https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/notebooks/airline_passenger_satisfaction_predictor.html)
+The final report can be found: [here](https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/notebooks/airline_passenger_satisfaction_predictor.html)
 
 # Dependencies
 This project requires the following Python packages and versions:
