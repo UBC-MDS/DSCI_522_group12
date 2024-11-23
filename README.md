@@ -15,11 +15,50 @@ The dataset we use to answer this question was sourced in Kaggle, posted by [@te
 The final report can be found
 
 # Dependencies
+This project requires the following Python packages and versions:
+
+- **ipykernel**: Used for interactive computing in Jupyter notebooks.
+- **matplotlib**: A library for creating static, animated, and interactive visualizations in Python.
+- **numpy** (version 1.22): A package for numerical computing and handling arrays.
+- **pandas** (version 1.3): A powerful data manipulation and analysis library.
+- **python** (version 3.9): The programming language required to run the project.
+- **category_encoders**: A package that provides various encoding techniques for categorical data.
+- **scikit-learn**: A library for machine learning algorithms and data mining.
+- **seaborn**: A Python visualization library based on matplotlib that provides a high-level interface for drawing attractive statistical graphics.
+- **conda-lock**: A tool for generating deterministic, reproducible conda environments.
+
+### Installation using Conda Lock
+
+To ensure a reproducible environment with exact dependency versions, you can use the `conda-lock` file. Follow these steps to set up the environment using the lock file:
+
+#### Step 1: Install `conda-lock`
+
+First, make sure that `conda-lock` is installed on your system. If you don't have it installed, you can install it via Conda:
+
+```bash
+conda install conda-lock
+
+#### Step 2: Install dependencies using the `conda-lock` file
+
+After `conda-lock` is installed, use the `conda-lock` file to install the environment. Run the following command in the directory containing the 'conda-lock.yml' file:
+```bash
+conda-lock install
+
+#### Step 3: Create and activate the environment
+Once the dependencies are installed, create the environment using:
+
+```bash
+conda env create --file conda-lock.yml
+
+Then, activate the environment:
+
+```bash
+conda activate <your-environment-name>
 
 
 # LICENSE
 
-The code in this repository is licensed under the MIT license. For more details, refer to the [LICENSE](LICENSE) file.
+The code in this repository is licensed under the MIT license. Refer to the [LICENSE](LICENSE) file for more details.
 
 # References
 
