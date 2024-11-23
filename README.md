@@ -63,4 +63,13 @@ The code in this repository is licensed under the MIT license. Refer to the [LIC
 
 # References
 
-TJ, Klein (2020, February). Airline Passenger Satisfaction. Retrieved November 20, 2024 from https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction/data
+1. **Mean and Standard Deviation of Cross-Validation Scores**  
+   DSCI 571 Lab 4. (2024, October). "Model Evaluation and Cross-Validation". Retrieved November 20, 2024 from [DSCI 571 Lab 4](https://github.ubc.ca/mds-2024-25/DSCI_571_sup-learn-1_students/tree/master/labs/lab4/solutions).
+
+2. **Confusion Matrix and ROC Curve**  
+   DSCI 573 Lecture 1. (2024, September). "Introduction to Model Performance Metrics". Retrieved November 20, 2024 from [DSCI 573 Lecture 1](https://pages.github.ubc.ca/mds-2024-25/DSCI_573_feat-model-select_students/lectures/01_classification-metrics.html).
+
+3. **Dataset**  
+   TJ, Klein. (2020, February). "Airline Passenger Satisfaction". Retrieved November 20, 2024 from [Kaggle Dataset](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction/data).
+
+
