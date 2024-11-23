@@ -37,24 +37,25 @@ First, make sure that `conda-lock` is installed on your system. If you don't hav
 
 ```bash
 conda install conda-lock
-
+```
 #### Step 2: Install dependencies using the `conda-lock` file
 
 After `conda-lock` is installed, use the `conda-lock` file to install the environment. Run the following command in the directory containing the 'conda-lock.yml' file:
+
 ```bash
 conda-lock install
-
+```
 #### Step 3: Create and activate the environment
 Once the dependencies are installed, create the environment using:
 
 ```bash
 conda env create --file conda-lock.yml
-
+```
 Then, activate the environment:
 
 ```bash
 conda activate <your-environment-name>
-
+```
 
 # LICENSE
 
