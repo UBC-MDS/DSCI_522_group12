@@ -13,7 +13,7 @@ The dataset we use to answer this question was sourced in Kaggle, posted by [@te
 
 # Report
 
-The final report can be found: [here](https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/notebooks/airline_passenger_satisfaction_predictor.html)
+The final report can be found: [here](https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/airline_passenger_satisfaction_predictor.html)
 
 # Dependencies
 This project requires the following Python packages and versions:
