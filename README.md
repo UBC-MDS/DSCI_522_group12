@@ -1,18 +1,19 @@
-# Airline Customer Satisfaction Predictor
+# US Airline Customer Satisfaction Predictor
 Authors: Hrayr Muradyan, Azin Piran, Sopuruchi Chisom, Shengjia Yu.
 
 # About
 
-In this project we try to predict the airline customer satisfaction based on several factors like: gender, age, travel class, etc.
+In this project we try to predict US airline customer satisfaction based on several factors like: gender, age, travel class, etc.
 Understanding customer satisfaction is very important for airlines as it provides directions to improve the service and equipment. 
 The right improvement, subsequently, will increase the revenue. Additionally, it will be easier to build customer loyalty.
-Loyal customers often promote the airline through word-of-mouth or positive reviews, reducing the cost of acquiring new customers.
+Loyal customers often promote the airline through word-of-mouth or positive reviews, reducing the cost of acquiring new customers (Sadegh Eshaghi, 2024). 
 Thus, the reasons to conduct the project are many. The main question is: <b>can we accurately predict the customer satisfaction from the information we have? </b>
 
-The dataset we use to answer this question was sourced in Kaggle, posted by [@teejmahal20](https://www.kaggle.com/teejmahal20) (TJ Klein). It is important to note that the dataset was originally posted by [@johndddddd](https://www.kaggle.com/datasets/johndddddd/customer-satisfaction), which is then modified and cleaned by [@teejmahal20](https://www.kaggle.com/teejmahal20). The full dataset can be found [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction).
+The dataset we use to answer this question was sourced in Kaggle, posted by [@teejmahal20](https://www.kaggle.com/teejmahal20) (TJ Klein). It is important to note that the dataset was originally posted by [@johndddddd](https://www.kaggle.com/datasets/johndddddd/customer-satisfaction), which is then modified and cleaned by [@teejmahal20](https://www.kaggle.com/teejmahal20). The full dataset can be found [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction). Additionally, the dataset contains **only** US airline data, as mentioned in the original source.
+
 # Report
 
-The final report can be found: [here](https://ubc-mds.github.io/airline-customer-satisfaction-predictor/airline_passenger_satisfaction_predictor.html)
+The final report can be found: [here](https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/notebooks/airline_passenger_satisfaction_predictor.html)
 
 # Dependencies
 This project requires the following Python packages and versions:
@@ -63,13 +64,6 @@ The code in this repository is licensed under the MIT license. Refer to the [LIC
 
 # References
 
-1. **Mean and Standard Deviation of Cross-Validation Scores**  
-   DSCI 571 Lab 4. (2024, October). "Model Evaluation and Cross-Validation". Retrieved November 20, 2024 from [DSCI 571 Lab 4](https://github.ubc.ca/mds-2024-25/DSCI_571_sup-learn-1_students/tree/master/labs/lab4/solutions).
+TJ, Klein. (2020, February). "Airline Passenger Satisfaction". Retrieved November 20, 2024 from [Kaggle Dataset](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction/data).
 
-2. **Confusion Matrix and ROC Curve**  
-   DSCI 573 Lecture 1. (2024, September). "Introduction to Model Performance Metrics". Retrieved November 20, 2024 from [DSCI 573 Lecture 1](https://pages.github.ubc.ca/mds-2024-25/DSCI_573_feat-model-select_students/lectures/01_classification-metrics.html).
-
-3. **Dataset**  
-   TJ, Klein. (2020, February). "Airline Passenger Satisfaction". Retrieved November 20, 2024 from [Kaggle Dataset](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction/data).
-
-
+M. Sadegh Eshaghi, Mona Afshardoost, Gui Lohmann, Brent D Moyle, Drivers and outcomes of airline passenger satisfaction: A Meta-analysis, Journal of the Air Transport Research Society, Volume 3, 2024, 100034, ISSN 2941-198X, https://doi.org/10.1016/j.jatrs.2024.100034.
