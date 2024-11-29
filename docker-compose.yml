@@ -1,0 +1,12 @@
+services:
+  analysis-env:
+    image: csuche/airline-customer-satisfaction-predictor:1241cfa
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/home/joyvan
+    deploy:
+      resources:
+        limits:
+          memory: 5G
+    platform: linux/amd64
