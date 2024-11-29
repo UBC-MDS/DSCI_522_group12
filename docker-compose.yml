@@ -1,6 +1,6 @@
 services:
   analysis-env:
-    image: csuche/airline-customer-satisfaction-predictor:1241cfa
+    image: csuche/airline-customer-satisfaction-predictor:256da27
     ports:
       - "8888:8888"
     volumes:
