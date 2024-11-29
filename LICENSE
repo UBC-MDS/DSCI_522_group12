@@ -22,7 +22,7 @@ SOFTWARE.
 
 ---
 
-For the portions of the project that are derived from [breast_cancer_predictor_py](https://github.com/ttimbers/breast-cancer-predictor):
+For the portions of the project(`docker-publish.yml` and `docker-compose.yml`) that are derived from [breast_cancer_predictor_py](https://github.com/ttimbers/breast-cancer-predictor):
 
 MIT License
 
