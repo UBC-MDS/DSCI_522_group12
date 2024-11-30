@@ -5,9 +5,13 @@ Authors: Hrayr Muradyan, Azin Piran, Sopuruchi Chisom, Shengjia Yu.
 
 In this project we try to predict US airline customer satisfaction based on several factors like: gender, age, travel class, etc.
 Understanding customer satisfaction is very important for airlines as it provides directions to improve the service and equipment. 
-The right improvement, subsequently, will increase the revenue. Additionally, it will be easier to build customer loyalty.
-Loyal customers often promote the airline through word-of-mouth or positive reviews, reducing the cost of acquiring new customers (Sadegh Eshaghi, 2024). 
-Thus, the reasons to conduct the project are many. The main question is: <b>can we accurately predict the customer satisfaction from the information we have? </b>
+The right improvement, subsequently, will translate to an increase in revenue. 
+
+Additionally, it will be easier to build customer loyalty.
+This is essential as loyal customers often promote the airline through word-of-mouth or positive reviews, reducing the cost of acquiring new customers (Sadegh Eshaghi, 2024). 
+
+Thus, the reasons to conduct the this analysis are abundant. 
+<br/>The main question is: <b>can we accurately predict the customer satisfaction from the information we have? </b>
 
 The dataset we use to answer this question was sourced in Kaggle, posted by [@teejmahal20](https://www.kaggle.com/teejmahal20) (TJ Klein). It is important to note that the dataset was originally posted by [@johndddddd](https://www.kaggle.com/datasets/johndddddd/customer-satisfaction), which is then modified and cleaned by [@teejmahal20](https://www.kaggle.com/teejmahal20). The full dataset can be found [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction). Additionally, the dataset contains **only** US airline data, as mentioned in the original source.
 
@@ -20,13 +24,16 @@ This project requires the following Python packages and versions:
 
 - **ipykernel**: Used for interactive computing in Jupyter notebooks.
 - **matplotlib**: A library for creating static, animated, and interactive visualizations in Python.
-- **numpy** (version 1.22): A package for numerical computing and handling arrays.
-- **pandas** (version 1.3): A powerful data manipulation and analysis library.
-- **python** (version 3.9): The programming language required to run the project.
-- **category_encoders**: A package that provides various encoding techniques for categorical data.
+- **numpy**: A package for numerical computing and handling arrays.
+- **pandas**: A powerful data manipulation and analysis library.
+- **python**: The programming language required to run the project.
 - **scikit-learn**: A library for machine learning algorithms and data mining.
 - **seaborn**: A Python visualization library based on matplotlib that provides a high-level interface for drawing attractive statistical graphics.
 - **conda-lock**: A tool for generating deterministic, reproducible conda environments.
+- **jupyterlab**: An Interactive Development Environment to write, debug, and test code.
+
+
+For the recent versions of the dependencies, view the [environment file](https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/dsci522_environment.yml).
 
 ### Installation using Conda Lock
 
