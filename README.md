@@ -65,6 +65,85 @@ Then, activate the environment:
 conda activate <your-environment-name>
 ```
 
+# Setting Up and Running the Analysis
+The steps below outline how to set up and run the analysis. Currently, the analysis requires a Docker-based computational environment, which is initialized first.
+
+### Step 1: Setup Docker Computational Environment
+
+> **Note:** The instructions contained in this section assume the commands are executed in a unix-based shell.
+
+1. **Install Docker**:
+    Install [Docker](https://www.docker.com/get-started/) and ensure that the docker engine is running. 
+    - To confirm that the docker engine is running open a terminal/command line and execute the following command:
+    ```bash 
+    docker run hello-world
+    ```
+    - The generated output should begine with a line **Hello from Docker!**
+2. **Clone this Repository**:
+    - Next, clone this repository to your local machine. 
+    ```bash
+    git clone <repo_url>
+    ```
+    
+3. **Start the Docker container locally**: 
+    - In the terminal/command line navigate to the root directory of your local copy of this project.
+    ```bash
+    cd <repo_directory>
+    ```
+    - Launch the docker container image for the computational environment.
+    ```bash
+    docker-compose up
+    ```
+    - The terminal logs should display an output similar to: **Jupyter Server 2.14.2 is running at:**
+    - Locate and click on the http address in the logs to access the Jupyter application from your web browser.
+    - Search for and your token(in the logs) if prompted for one. 
+    
+The Jupyter environment allows for interactive execution of the analysis.
+
+### Step 2: Mirror the File Structure in the Computational Environment
+1. **Existing Folder Structure**:  
+   Once your Jupyter environment launched you should notice a home directory (`/home/joyvan`).
+2. **Replicate the repository File Structure
+    To ensure the analysis runs smoothly, replicate the following folder structure in the Jupyter environment from within the home directory:  
+   ```
+   ```markdown
+    project-root/
+    ├── work/
+    ├── data/
+    │   ├── train.csv
+    │   ├── test.csv
+    ├── notebook/
+    │   └── airline_passenger_satisfaction_predictor.ipynb
+   ```
+
+   - Create a folder named `data` and upload the `train.csv` and `test.csv` files into it.  
+   - Place the analysis notebook (`airline_passenger_satisfaction_predictor.ipynb`) inside a folder named `notebook`.
+
+3. **Update the File Paths in the Notebook**:  
+   Modify the notebook code to reflect the new file paths:  
+
+   Replace:
+   ```python
+   # Load the dataset
+   train_data = pd.read_csv('../data/train.csv')
+   test_data = pd.read_csv('../data/test.csv')
+   ```  
+   With:
+   ```python
+   # Load the dataset
+   train_data = pd.read_csv('./data/train.csv')
+   test_data = pd.read_csv('./data/test.csv')
+   ```  
+
+### Step 3: Run the Analysis
+
+1. In the Jupyter notebook interface, open the file `airline_passenger_satisfaction_predictor.ipynb` from the `notebook` folder.  
+2. Click **"Run All"** to execute the entire analysis.  
+
+The results of the analysis will be displayed within the notebook as it runs each cell.
+
+
+
 # LICENSE
 
 The code in this repository is licensed under the MIT license. Refer to the [LICENSE](LICENSE) file for more details.
