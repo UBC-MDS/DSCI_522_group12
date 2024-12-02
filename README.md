@@ -100,42 +100,8 @@ The steps below outline how to set up and run the analysis. Currently, the analy
     
 The Jupyter environment allows for interactive execution of the analysis.
 
-### Step 2: Mirror the File Structure in the Computational Environment
-1. **Existing Folder Structure**:  
-   Once your Jupyter environment launched you should notice a home directory (`/home/joyvan`).
-2. **Replicate the repository File Structure
-    To ensure the analysis runs smoothly, replicate the following folder structure in the Jupyter environment from within the home directory:  
-   ```
-   ```markdown
-    project-root/
-    ├── work/
-    ├── data/
-    │   ├── train.csv
-    │   ├── test.csv
-    ├── notebook/
-    │   └── airline_passenger_satisfaction_predictor.ipynb
-   ```
 
-   - Create a folder named `data` and upload the `train.csv` and `test.csv` files into it.  
-   - Place the analysis notebook (`airline_passenger_satisfaction_predictor.ipynb`) inside a folder named `notebook`.
-
-3. **Update the File Paths in the Notebook**:  
-   Modify the notebook code to reflect the new file paths:  
-
-   Replace:
-   ```python
-   # Load the dataset
-   train_data = pd.read_csv('../data/train.csv')
-   test_data = pd.read_csv('../data/test.csv')
-   ```  
-   With:
-   ```python
-   # Load the dataset
-   train_data = pd.read_csv('./data/train.csv')
-   test_data = pd.read_csv('./data/test.csv')
-   ```  
-
-### Step 3: Run the Analysis
+### Step 2: Run the Analysis
 
 1. In the Jupyter notebook interface, open the file `airline_passenger_satisfaction_predictor.ipynb` from the `notebook` folder.  
 2. Click **"Run All"** to execute the entire analysis.  
