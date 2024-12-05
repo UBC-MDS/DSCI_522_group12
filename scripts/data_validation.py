@@ -22,6 +22,28 @@ def clean_column_names(df):
     
     return df
 
+# running it 
+"""
+# cd into the root of this directory
+# download into relative path from the root and create directory if it doesn't exist
+curl -L --create-dirs -o ./data/raw/airline-passenger-satisfaction.zip\
+    https://www.kaggle.com/api/v1/datasets/download/teejmahal20/airline-passenger-satisfaction
+
+# unzip the folders
+unzip data/raw/airline-passenger-satisfaction.zip -d data/raw/
+rm data/raw/airline-passenger-satisfaction.zip
+mkdir './data/val/'
+
+# run the scipt
+python scripts/data_validation.py './data/raw/train.csv' './data/raw/test.csv' './data/val/' './data/val/'
+"""
+
+
+@click.command()
+@click.argument('raw_train_path', type=click.Path(exists=True, dir_okay=True, readable=True))
+@click.argument('raw_test_path', type=click.Path(exists=True, dir_okay=True, readable=True))
+@click.argument('val_train_path', type=click.Path(exists=True, dir_okay=True, file_okay=False, writable=True))
+@click.argument('val_test_path', type=click.Path(exists=True, dir_okay=True, file_okay=False, writable=True))
 def main(raw_train_path, raw_test_path, val_train_path, val_test_path):
     train_data = pd.read_csv(raw_train_path, index_col='Unnamed: 0')
     test_data = pd.read_csv(raw_test_path, index_col='Unnamed: 0')
