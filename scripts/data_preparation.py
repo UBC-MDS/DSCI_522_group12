@@ -29,6 +29,9 @@ def clean_column_names(df):
 
     return df
 
+def correct_precision_after_scaling(df, ordinal_features, decimals=2):
+    df[ordinal_features] = df[ordinal_features].astype("float32")
+
 @click.command()
 @click.option('--raw_data', type=str, help="Path to a raw data")
 @click.option('--test_size', type=float, help="The proportion of the data points allocated to the test set", default=0.2)
@@ -99,7 +102,7 @@ def main(raw_data, test_size, data_to, preprocessor_to, seed):
 
     # Define the preprocessor
     preprocessor = make_column_transformer(
-        (OneHotEncoder(handle_unknown='ignore'), categorical_cols),
+        (OneHotEncoder(drop='first', handle_unknown='ignore', dtype=np.int32), categorical_cols),
         (MinMaxScaler(), ordinal_cols),
         (StandardScaler(), numerical_cols),
         ('drop', drop_cols),
@@ -120,6 +123,10 @@ def main(raw_data, test_size, data_to, preprocessor_to, seed):
     # Convert the numpy array to dataframe
     scaled_train_df = pd.DataFrame(scaled_train_array, columns=all_cols)
     scaled_test_df = pd.DataFrame(scaled_test_array, columns=all_cols)
+
+    # Some ordinal features have precision error, this function fixes it
+    correct_precision_after_scaling(scaled_train_df, ordinal_cols)
+    correct_precision_after_scaling(scaled_test_df, ordinal_cols)
 
     # Save the preprocessor
     pickle.dump(preprocessor, open(preprocessor_to / "preprocessor.pickle", "wb"))
