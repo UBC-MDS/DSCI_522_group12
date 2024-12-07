@@ -10,7 +10,7 @@ from sklearn.compose import make_column_transformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, MinMaxScaler
 from pathlib import Path
 import pickle
-from data_validation_v2 import validate_data
+from data_validation import validate_data
 
 def clean_column_names(df):
     """
