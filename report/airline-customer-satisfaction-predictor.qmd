@@ -13,7 +13,6 @@ format:
         fig-pos: 'h'
 bibliography: references.bib
 citation: true
-csl: apa.csl
 execute:
   echo: false
   warning: false
