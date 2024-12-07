@@ -5,6 +5,7 @@ import pandas as pd
 import pickle
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix,\
     ConfusionMatrixDisplay, PrecisionRecallDisplay, RocCurveDisplay
+import sys
 
 @click.command()
 @click.option('--test_path', 
@@ -64,5 +65,12 @@ def main(pipeline, test_path, results_to):
     plt.title("ROC Curve")
     roc_curve.figure_.savefig(os.path.join(results_to, "roc_curve.png"))
 
+    print(f"Model evaluation results saved in the directory: {results_to}")
+
 if __name__ == "__main__":
-    main()
+    try:
+        main(standalone_mode=False)  # Prevents sys.exit()
+        print("Congratulations! Model Evaluation passed!")
+    except Exception as e:
+        print(f"The following error occurred: {e}")
+        sys.exit(1)
