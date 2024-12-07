@@ -109,6 +109,9 @@ def main(raw_data, test_size, data_to, preprocessor_to, seed):
         remainder='passthrough'
     )
 
+    # Save the preprocessor
+    pickle.dump(preprocessor, open(preprocessor_to / "preprocessor.pickle", "wb"))
+
     # Fit the preprocessor
     preprocessor.fit(train_data)
 
@@ -127,9 +130,6 @@ def main(raw_data, test_size, data_to, preprocessor_to, seed):
     # Some ordinal features have precision error, this function fixes it
     correct_precision_after_scaling(scaled_train_df, ordinal_cols)
     correct_precision_after_scaling(scaled_test_df, ordinal_cols)
-
-    # Save the preprocessor
-    pickle.dump(preprocessor, open(preprocessor_to / "preprocessor.pickle", "wb"))
 
     # Save the scaled data
     scaled_train_df.to_csv(processed_data_directory / "scaled_satisfaction_train.csv", index=False)
