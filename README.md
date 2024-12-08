@@ -65,50 +65,87 @@ Then, activate the environment:
 conda activate <your-environment-name>
 ```
 
-# Setting Up and Running the Analysis
-The steps below outline how to set up and run the analysis. Currently, the analysis requires a Docker-based computational environment, which is initialized first.
+# Usage
+The steps below outline how to set up and run the analysis. 
 
-### Step 1: Setup Docker Computational Environment
+### Step 1: Clone the repository
+
+Using Https:
+```bash
+git clone https://github.com/UBC-MDS/airline-customer-satisfaction-predictor.git
+```
+
+Using SSH
+```bash
+git clone git@github.com:UBC-MDS/airline-customer-satisfaction-predictor.git
+```
+
+### Step 2: Setup Docker Computational Environment
 
 > **Note:** The instructions contained in this section assume the commands are executed in a unix-based shell.
-
-1. **Install Docker**:
-    Install [Docker](https://www.docker.com/get-started/) and ensure that the docker engine is running. 
-    - To confirm that the docker engine is running open a terminal/command line and execute the following command:
-    ```bash 
-    docker run hello-world
-    ```
-    - The generated output should begine with a line **Hello from Docker!**
-2. **Clone this Repository**:
-    - Next, clone this repository to your local machine. 
-    ```bash
-    git clone <repo_url>
-    ```
     
-3. **Start the Docker container locally**: 
+1. **Navigate to the root directory of the project**: 
     - In the terminal/command line navigate to the root directory of your local copy of this project.
     ```bash
     cd <repo_directory>
     ```
-    - Launch the docker container image for the computational environment.
+2. **Launch the docker container image for the computational environment**:
+
     ```bash
     docker-compose up
     ```
     - The terminal logs should display an output similar to: **Jupyter Server 2.14.2 is running at:**
-    - Locate and click on the http address in the logs to access the Jupyter application from your web browser.
-    - Search for and your token(in the logs) if prompted for one. 
+    - Locate the URL starting with `http://127.0.0.1:8888/lab?token=` and click (or copy and paste in the browser) on the http address in the logs to access the Jupyter application from your web browser.
+
+    Example link: `http://127.0.0.1:8888/lab?token=9f22c04a7fe732fdb2d2d98f1c2c0b74a89a5a6a1d60b45b`
     
-The Jupyter environment allows for interactive execution of the analysis.
 
 
-### Step 2: Run the Analysis
+### Step 3: Run the Analysis
 
-1. In the Jupyter notebook interface, open the file `airline_passenger_satisfaction_predictor.ipynb` from the `notebook` folder.  
-2. Click **"Run All"** to execute the entire analysis.  
+Open a terminal and run the following commands in the order provided:
 
-The results of the analysis will be displayed within the notebook as it runs each cell.
+```bash
+python scripts/data_download.py \
+    --url="teejmahal20/airline-passenger-satisfaction" \
+    --save-to="./data/" \
+    --file-to="combined_dataset.csv"
 
+python scripts/data_preparation.py \
+    --raw-data="./data/combined_dataset.csv" \
+    --test-size=0.2 \
+    --data-to="./data/" \
+    --preprocessor-to="./results/models/"
 
+python scripts/eda.py \
+    --train-data-path="./data/processed/scaled_satisfaction_train.csv" \
+    --plot-to="./results/figures/"
+
+python scripts/model_training.py \
+    --preprocessor-path="./results/models/preprocessor.pickle" \
+    --pipeline-to="./results/models/" \
+    --train-path="./data/raw/satisfaction_train.csv" \
+    --eval-metric="f1" \
+    --plot-save-path="./results/figures/" \
+    --cv-results-save-path="./results/tables/"
+
+python scripts/model_evaluation.py \
+    --pipeline="./results/models/model_pipeline.pickle" \
+    --test-path="./data/raw/satisfaction_test.csv" \
+    --results-to="./results/tables/" \
+    --plots-to="./results/figures/"
+
+quarto render report/airline-customer-satisfaction-predictor.qmd --to html
+quarto render report/airline-customer-satisfaction-predictor.qmd --to pdf
+```
+
+Alternatively you can open the notebook `notebooks/terminal_commands_notebook.ipynb` and run all the cells in order which will execute all the commands mentioned above.
+
+### Clean up
+To shut down the docker container and clean up the resources, interrupt the terminal by **Ctrl + C**. Then type:
+```bash
+docker compose rm
+```
 
 # LICENSE
 
