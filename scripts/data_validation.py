@@ -1,7 +1,3 @@
-# data_validation.py
-# author: Hrayr Muradyan
-# date: 2024-12-02
-
 import pandera as pa
 
 def check_duplicates(df):

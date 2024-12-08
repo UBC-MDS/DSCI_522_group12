@@ -1,7 +1,3 @@
-# data_preparation.py
-# author: Hrayr Muradyan
-# date: 2024-12-02
-
 import click
 import numpy as np
 import pandas as pd
