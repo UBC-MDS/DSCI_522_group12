@@ -1,14 +1,10 @@
-# data_validation.py
-# author: Hrayr Muradyan
-# date: 2024-12-02
-
 import pandera as pa
 
 def check_duplicates(df):
     return not bool(df.drop('id', axis=1).duplicated().sum())
 
 def validate_data(df, missing_data_threshold):
-
+    # Define the schema
     schema = pa.DataFrameSchema(
         {
             "gender": pa.Column(str, pa.Check.isin(["Male", "Female"]), nullable=False),
@@ -41,8 +37,9 @@ def validate_data(df, missing_data_threshold):
             pa.Check(check_duplicates, error = "There are duplicates observations in the dataset!")
         ])
 
+    # Check the data with the above defined schema
     try:
         schema.validate(df, lazy=True)
-        print("Congratulations! Data validation passed!")
+        print("Congratulations! Data validation passed!\n")
     except pa.errors.SchemaErrors as e:
         print(e.failure_cases)
