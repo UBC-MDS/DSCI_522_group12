@@ -159,11 +159,11 @@ test_scores_rounded
 
 ```
 
-The model achieved strong performance on the test dataset, with an accuracy of **`{python} test_scores_rounded.loc[0, 'Accuracy']`**. 
-It demonstrated high precision (**`{python} test_scores_rounded.loc[0, 'Precision']`**) in predicting "satisfied" passengers, 
-meaning most of its positive predictions were correct. The recall was **`{python} test_scores_rounded.loc[0, 'Recall']`**, 
+The model achieved strong performance on the test dataset, with an accuracy of `{python} test_scores_rounded.loc[0, 'Accuracy']`. 
+It demonstrated high precision `{python} test_scores_rounded.loc[0, 'Precision']` in predicting "satisfied" passengers, 
+meaning most of its positive predictions were correct. The recall was `{python} test_scores_rounded.loc[0, 'Recall']`, 
 indicating the model successfully identified most "satisfied" passengers, though there is slight room for improvement. 
-The F1-score of **`{python} test_scores_rounded.loc[0, 'F1-Score']`** reflects a good balance between precision and recall, indicating overall reliable performance.
+The F1-score of `{python} test_scores_rounded.loc[0, 'F1-Score']` reflects a good balance between precision and recall, indicating overall reliable performance.
 
 While the results are very promising, there are several limitations of the project that should be addressed. 
 Firstly, the dataset contains only US airline observations which limits its usage to only US-based airline scenarios.
