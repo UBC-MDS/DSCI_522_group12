@@ -12,3 +12,6 @@ dependencies:
   - conda-lock=2.5.7
   - jupyterlab=4.0.5
   - pandera=0.21.0 
+  - click=8.1.7
+  - deepchecks=0.3.2
+  - kagglehub=0.3.4
