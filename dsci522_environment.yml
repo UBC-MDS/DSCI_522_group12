@@ -1,6 +1,7 @@
 name: dsci522-airline-pred
 channels:
   - conda-forge
+  - defaults
 dependencies:
   - ipykernel=6.16
   - matplotlib=3.7
@@ -12,3 +13,5 @@ dependencies:
   - conda-lock=2.5.7
   - jupyterlab=4.0.5
   - pandera=0.21.0 
+  - click=8.1.7
+  - kagglehub=0.3.4
