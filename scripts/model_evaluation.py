@@ -45,7 +45,6 @@ def main(pipeline, test_path, results_to, plots_to):
     final_model = pickle.load(open(pipeline, "rb"))
     y_test_pred = final_model.predict(X_test)
     
-    # Calculate the scoring metrics and save them in a dataframe
     scoring_metrics = pd.DataFrame({
         "Accuracy": [accuracy_score(y_test, y_test_pred)],
         "Recall": [recall_score(y_test, y_test_pred, pos_label = 'satisfied')],

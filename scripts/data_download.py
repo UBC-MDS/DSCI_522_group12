@@ -63,6 +63,7 @@ def main(url, save_to, file_to, force_save):
         """)
         return
 
+
     # If save_to is a directory, not a file save the dataset, if not, raise an error
     if save_to.is_dir():
         dataset.to_csv(file_to_save, index=False)
@@ -70,7 +71,7 @@ def main(url, save_to, file_to, force_save):
         raise ValueError("The argument save_to is not a directory!")
     
     print(f"The dataset was successfully downloaded and saved in the directory: \033[1m{save_to}\033[0m\n")
-    
+
 if __name__ == '__main__':
     main()
 

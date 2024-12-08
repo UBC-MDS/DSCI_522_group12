@@ -36,6 +36,7 @@ def validate_data(df, missing_data_threshold):
             pa.Check(lambda df: (df.isna().sum() / len(df) < missing_data_threshold).all(), error=f"Some columns have more than {missing_data_threshold*100}% missing values."),
             pa.Check(check_duplicates, error = "There are duplicates observations in the dataset!")
         ])
+
     # Check the data with the above defined schema
     try:
         schema.validate(df, lazy=True)

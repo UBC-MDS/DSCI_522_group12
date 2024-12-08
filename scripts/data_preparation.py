@@ -92,11 +92,13 @@ def main(raw_data, test_size, data_to, preprocessor_to, seed):
         satisfaction_data, test_size=test_size, random_state=seed
     )
 
+
     # Save the splitted raw datasets 
     train_data.to_csv(raw_data_directory / "satisfaction_train.csv", index=False)
     test_data.to_csv(raw_data_directory / "satisfaction_test.csv", index=False)
 
     # Print about saving the raw data in the terminal
+
     print(f"Raw data is saved in the directory: \033[1m{raw_data_directory}\033[0m\n")
 
     # Define column types
