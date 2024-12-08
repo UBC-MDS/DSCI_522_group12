@@ -1,1 +1,7 @@
 */__pycache__/*
+.bash_history
+.cache/
+.ipynb_checkpoints/
+.jupyter/
+.kaggle/
+.local/
