@@ -21,36 +21,39 @@ editor: source
 
 ```{python}
 import pandas as pd
-import pandera as pa
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.compose import make_column_transformer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder, MinMaxScaler
-from sklearn.dummy import DummyClassifier
-from sklearn.model_selection import cross_validate
-from sklearn.pipeline import make_pipeline
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import make_scorer, f1_score
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.metrics import precision_score
-from sklearn.model_selection import GridSearchCV
-
 ```
+\newpage
+
 # **Summary**
 In this project, we created a classification model that uses a decision tree algorithm to predict airline customers satisfaction based on a variety of factors such as in-flight service quality, seat comfort, and demographic information. Customers were classified as either satisfied (positive ratings) or neutral/dissatisfied (negative ratings). Our final decision tree model performed well on an unknown test dataset, with an overall accuracy of 95.02%, a recall of 92.61%, a precision of 95.86%, and an F1-score of 94.21%.Based on the confusion matrix (Figure 1), the model correctly identified 24,683 cases while misclassifying 1,293 instances. There were 839 false negatives (satisfied consumers categorized as indifferent or dissatisfied), and 454 false positives (neutral or unsatisfied customers classified as satisfied). The imbalance between false negatives and false positives shows that the model favours overall accuracy while having slightly lesser sensitivity for spotting satisfied consumers.These findings show that the decision tree model accurately detects consumer satisfaction patterns, making it a useful tool for examining key aspects that influence satisfaction. However, the relatively high frequency of false negatives may lead to an underestimation of satisfied consumers, potentially leading in ineffective compensatory measures. Similarly, false positives may result in consumer unhappiness being disregarded. Despite these limitations, the model provides a solid foundation for customer satisfaction analysis and could be used as an effective decision-making tool by airlines. Future work should strive to improve the model's sensitivity and specificity while also validating its performance across a wide range of customer segments, aircraft routes, and service circumstances.
 
 # **Introduction**
 In the highly competitive field of air transport management, passenger satisfaction plays a critical role in making customer loyalty, providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (Sadegh Eshaghi et al, 2024). While there are numerous studies held on factors influencing customer satisfaction like service quality (???Namukasa, 2023), it is very important to be able to predict the customer satisfaction with high accuracy for understanding how to improve and make better decisions. In this study, we aim to create a reliable predictive model that will predict US airline passenger satisfaction with high performance.
 
-# **Methods**
-## **Dataset Overview**
-The dataset includes a variety of features such as:
-- **Flight Information**: Flight distance, departure delay, arrival delay, etc.
-- **Passenger Demographics**: Age, gender, travel class, etc.
-- **Flight Service Quality**: Satisfaction ratings on aspects such as in-flight entertainment, seat comfort, and food quality.
+\newpage
 
-The goal is to predict the **passenger satisfaction** (either satisfied or dissatisfied) based on these features.
+# **Methods**
+
+## **Dataset Overview**
+The dataset contains a wide array of features designed to provide a comprehensive view of the factors affecting passenger satisfaction. These features are grouped into several categories, each contributing valuable information to the overall prediction model:
+
+- **Flight Information**: This includes key flight-related details such as:
+  - **Flight distance**: The distance covered during the flight, which can affect the overall travel experience, particularly in terms of comfort and time spent.
+  - **Departure delay**: The delay in the flight's scheduled departure time, which can negatively impact the passenger's satisfaction due to inconvenience or missed connections.
+  - **Arrival delay**: Similar to departure delay, this refers to the flight’s delay in reaching its destination. Passengers often associate delays with poor service quality, which could lead to dissatisfaction.
+
+- **Passenger Demographics**: The dataset also captures various demographic details about the passengers:
+  - **Age**: Age groups might have varying levels of comfort or expectations when it comes to flight services, influencing their satisfaction ratings.
+  - **Gender**: Gender could potentially correlate with differences in travel preferences or service expectations.
+
+- **Flight Service Quality**: This category focuses on various aspects of the flight experience, including:
+  - **In-flight entertainment**: Quality and availability of entertainment options during the flight, which is important for longer journeys or passengers seeking comfort.
+  - **Seat comfort**: The comfort level of the seats, an important factor for passenger satisfaction, especially on long flights.
+
+The primary goal of this dataset is to predict **passenger satisfaction**, which is classified into two categories: **satisfied** and **dissatisfied**. The model is trained to analyze the relationships between the provided features and the satisfaction level, with the aim of identifying the key factors that influence a passenger’s likelihood of being satisfied or dissatisfied with their flight experience. This prediction could be used by airlines to improve service quality, address pain points in passenger experience, and optimize overall customer satisfaction.
+
+
+\newpage
 
 ### **Data Exploration and Preprocessing**
 
@@ -60,9 +63,9 @@ The target variable, 'satisfaction', consists of two categories: 'neutral or dis
 
 - **Class Distribution**: The 'satisfaction' column is slightly imbalanced, with 56.5% of the observations labeled as 'neutral or dissatisfied' and 43.5% as 'satisfied'. This is considered a minor imbalance and should not significantly affect model performance.
 
-- **Data Type and Category Check**: The 'satisfaction' column was confirmed to be of type `object` ???, indicating that it is categorical. There are only two unique categories in this column, as expected.
+- **Data Type and Category Check**: The 'satisfaction' column was confirmed to be of type `object`, indicating that it is categorical. There are only two unique categories in this column, as expected.
 
-???? we should have a graph here
+![Target Variable Distribution](../results/figures/target_variable_distribution.png)
 
 ### **Data Splitting**
 
@@ -77,21 +80,35 @@ The purpose of this Exploratory Data Analysis (EDA) is to gain a deeper understa
 
 #### **Distribution of Numerical Variables**
 Histograms were plotted for all numerical features, revealing that most of the numerical variables, except for age, are right-skewed. This suggests that these features do not follow a normal distribution and may require transformation.
+
 ???
 
 #### Correlation Analysis
 A correlation matrix was computed for numerical variables to check for multicollinearity. Notably, `departure_delay_in_minutes` and `arrival_delay_in_minutes` were found to be highly correlated, suggesting redundancy. One of these features can be dropped to avoid multicollinearity.
 
 A heatmap visualization of the correlation matrix highlighted these relationships:
-???
+
+![Heatmap of Correlations Between Predictors for Airline Customer Satisfaction Dataset](../results/figures/correlation_matrix.png)
+
+\newpage
 
 #### Feature-Target Relationships
-- **Numerical Features**: Density plots were generated to examine how numerical features correlate with the target variable `satisfaction`. These plots indicated that no single feature strongly separated the two classes, suggesting that complex interactions between features may be necessary for predictive modeling.
-  ???
-- **Ordinal Features**: Count plots were used to analyze ordinal features, such as `seat_comfort`, `on_board_service`, and `inflight_entertainment`. These features showed very few observations with values of 0, which will need to be addressed during preprocessing.
+##### **Numerical Features**
+Density plots (@fig-numeric_feat_target_plots) were generated to examine how numerical features correlate with the target variable `satisfaction`. These plots indicated that no single feature strongly separated the two classes, suggesting that complex interactions between features may be necessary for predictive modeling.
 
-The EDA revealed that the target variable is slightly imbalanced, while many numerical variables are right-skewed and may require transformations. There is high correlation between certain features, suggesting redundancy, and no single feature strongly separates the target variable, indicating the need for more complex models. Missing values were addressed by removing redundant columns, and the dataset is now ready for further preprocessing and modeling.
+![Numerical Features-Target Relationships](../results/figures/numeric_feat_target_plots.png){#fig-numeric_feat_target_plots width=80%}
 
+\newpage
+##### **Ordinal Features**
+Count plots were used to analyze ordinal features, such as `seat_comfort`, `on_board_service`, and `inflight_entertainment`. These features showed very few observations with values of 0, which must be addressed during preprocessing.
+
+\newpage
+
+![Ordinal Features-Target Relationships](../results/figures/cat_feat_target_plots.png){#fig-cat_feat_target_plots width=50%}
+
+\newpage
+
+The **EDA** revealed that the target variable is slightly imbalanced, while many numerical variables are right-skewed and may require transformations. There is high correlation between certain features, suggesting redundancy, and no single feature strongly separates the target variable, indicating the need for more complex models. Missing values were addressed by removing redundant columns, and the dataset is now ready for further preprocessing and modeling.
 
 ### **Preprocessing**
 
@@ -111,18 +128,72 @@ The EDA revealed that the target variable is slightly imbalanced, while many num
 
 This preprocessing pipeline ensures the dataset is properly prepared for analysis and modeling, with consistent scaling and encoding applied across the features.
 
-
+\newpage
 ## **Analysis**
+ 
+The analysis of the data began with a thorough exploration to identify patterns and correlations that could inform model development. Key features influencing passenger satisfaction were identified, such as `departure_delay_in_minutes`, `inflight_entertainment_rating`, and `seat_comfort_rating`. High correlation between `arrival_delay_in_minutes` and `departure_delay_in_minutes` was observed, leading to the exclusion of the less significant feature to avoid multicollinearity.  
+
+For model building, a decision tree classifier was selected for its interpretability and ability to handle both categorical and numerical data. A grid search with 5-fold cross-validation was employed to optimize hyperparameters, specifically focusing on the `max_depth` to balance model complexity and performance.  
+
+Post-model training, performance metrics, including accuracy and F1-score, were analyzed to assess the model's effectiveness. The confusion matrix provided insights into classification errors, revealing a significant number of false negatives, indicating the model's limitation in predicting dissatisfied passengers. This finding prompted further evaluation of potential model enhancements, such as ensemble methods, to improve classification accuracy.  
+
+Through this analysis, it became evident that addressing feature selection and optimizing hyperparameters were critical steps in enhancing the model's predictive capability for airline passenger satisfaction.
 
 
 # **Results and Discussion**
-To determine each feature's role in forecasting consumer satisfaction, we examined its correlations with the target variable.  No features showed significant correlation with satisfaction(Figure 2), which might result in near-perfect class separation, implying that satisfaction is impacted by numerous variables rather than just one. Many features were kept in the model because they provided unique information. However, multicollinearity was found between arrival_delay_in_minutes and departure_delay_in_minutes (correlation coefficient = 0.97, Figure 1). To solve this, we removed the arrival_delay_in_minutes feature, as both perhaps provided the same information.We chose the Decision Tree classifier since it outperformed alternative models, including Dummy and Logistic Regression, on all validation measures. The Decision Tree has the best validation_accuracy (94.5%) and validation_f1 (0.945), demonstrating an excellent balance of precision and recall.To further improve the decision tree, we used grid search with 10-fold cross-validation to optimize the max_depth hyperparameter, testing depths of 10, 12, 15, and 18.The ideal depth of 15 resulted in a mean cross-validation accuracy of 95.2%, which balanced model complexity and performance. While Decision Trees are prone to overfitting, rigorous hyperparameter tweaking reduced this problem, providing strong generalization on test data.
+The analysis of the confusion matrix, precision-recall curve, and ROC curve provides valuable insights into the performance of our model, which is designed to predict customer satisfaction for US airlines. Overall, the model exhibits high accuracy and strong discriminatory power, yet there are areas for potential refinement.
 
-![Heatmap of Correlations Between Predictors for Airline Customer Satisfaction Dataset](../results/correlation_matrix.png)
+## **Classification report**
 
-![Distribution of Categorical Features Across Customer Satisfaction Levels](../results/cat_feat_target_plots.png)
+The classification report provided a detailed evaluation of the model's performance across key metrics, including precision, recall, and F1-score for both satisfied and dissatisfied passenger classes. The model demonstrated higher precision for predicting satisfied passengers, indicating fewer false positives in this class. However, recall for dissatisfied passengers was relatively low, suggesting challenges in correctly identifying dissatisfied passengers. This imbalance highlights areas for improvement, such as refining the dataset or exploring ensemble methods to enhance recall and overall classification performance. We present the classification report in @tbl-classification_report.
 
-The resulting decision tree model performed well on the test dataset, with an overall accuracy of 95.0% and an F1-score of 94.2%. The confusion matrix (Figure 3) showed that the model successfully identified 24,683 of 25,976 samples. However, there were 839 false positives (satisfied customers misclassified as dissatisfied) and 454 false negatives (unsatisfied customers misclassified as satisfied). While the model is effective at identifying pleased customers, decreasing false negatives remains a top focus since they represent missed chances to boost customer retention.In the future, analyzing misclassifications may uncover trends or interactions that were previously undetected, leading to improved model performance. Testing ensemble approaches, such as Random Forest or Gradient Boosting, could help reduce overfitting and better leverage feature interactions. Including probabilistic outputs would allow stakeholders to assess prediction confidence levels, enabling more targeted interventions for high-risk consumers. Adjusting class weights in ensemble models could further minimize bias.
-![Confusion Matrix for Customer Satisfaction Prediction Model On Test Data](../results/confusion_matrix.png)
+```{python}
+#| label: tbl-classification_report
+#| tbl-cap: Classification report
+classification_report = pd.read_csv("../results/tables/classification_report.csv")
+classification_report_rounded = classification_report.round(2)
+classification_report_rounded
+
+```
+The classification report provided a detailed evaluation of the model's performance across key metrics, including precision, recall, and F1-score for both neutral or dissatisfied and satisfied passenger classes. The model demonstrated higher precision for predicting satisfied passengers (**`{python} classification_report_rounded.iloc[0, 1]`**), indicating fewer false positives in this class. However, recall for neutral or dissatisfied passengers (**`{python} classification_report_rounded.iloc[0, 0]`**) was relatively low, suggesting challenges in correctly identifying dissatisfied passengers. This imbalance highlights areas for improvement, such as refining the dataset or exploring ensemble methods to enhance recall and overall classification performance. We present the classification report in @tbl-classification_report.
+
+## **Confusion Matrix Analysis**
+
+The confusion matrix (@fig-confusion_matrix) reveals that the model performs well in classifying both positive and negative classes. It correctly identifies a significant number of samples as "neutral or dissatisfied" and "satisfied." Misclassifications are minimal, with only a few instances of "satisfied" samples being incorrectly labeled as "neutral or dissatisfied" and vice versa. This imbalance suggests that the model demonstrates a slightly higher recall for the "neutral or dissatisfied" class compared to the "satisfied" class. While this bias might be acceptable for applications where identifying dissatisfied customers is more critical, it could lead to overlooked cases of satisfied customers in scenarios requiring balanced class representation. Adjustments to the decision threshold or rebalancing the training data may help mitigate this bias, resulting in improved recall for the "satisfied" class.
+
+![Confusion Matrix for Customer Satisfaction Prediction Model On Test Data](../results/figures/confusion_matrix.png){#fig-confusion_matrix width=80%}
+
 \newpage
+
+## **Precision-Recall and ROC Curves**
+### Precision-Recall Curve
+The Precision-Recall curve illustrates the trade-off between precision and recall across different thresholds. In our case, the curve is quite smooth, showing that both precision and recall remain high and stable, indicating that the model's predictions are reliable and consistent across the classes. This suggests that the model is well-calibrated and effective at distinguishing the "satisfied" class from the "neutral or dissatisfied" class.
+
+
+
+### ROC Curve
+The ROC curve, which represents the trade-off between the true positive rate and false positive rate, complements the Precision-Recall curve by showing the model’s ability to discriminate between the positive and negative classes at various thresholds. A model with a higher area under the curve (AUC) suggests better classification performance. In this case, the model's ROC curve indicates excellent performance, as it demonstrates a clear ability to distinguish between the "satisfied" and "neutral or dissatisfied" classes.
+
+\newpage
+
+### Model Performance on Test Data
+
+You can see the detailed results in the table below @tbl-test_scores.
+```{python}
+#| label: tbl-test_scores
+#| tbl-cap: Test Scores
+test_scores = pd.read_csv("../results/tables/test_scores.csv")
+test_scores_rounded = test_scores.round(2)
+test_scores_rounded
+
+```
+
+The model achieved strong performance on the test dataset, with an accuracy of **`{python} test_scores_rounded.loc[0, 'Accuracy']`**. It demonstrated high precision (**`{python} test_scores_rounded.loc[0, 'Precision']`**) in predicting "satisfied" passengers, meaning most of its positive predictions were correct. The recall was **`{python} test_scores_rounded.loc[0, 'Recall']`**, indicating the model successfully identified most "satisfied" passengers, though there is slight room for improvement. The F1-score of **`{python} test_scores_rounded.loc[0, 'F1-Score']`** reflects a good balance between precision and recall, indicating overall reliable performance.
+
+
+
+
+
+\newpage
+
 ## **References**
