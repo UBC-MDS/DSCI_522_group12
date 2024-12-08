@@ -41,6 +41,8 @@ from sklearn.model_selection import GridSearchCV
 
 # **Predicting US Airline Passenger Satisfaction: A Data-Driven Approach**
 
+### **Summary**
+
 ## **Introduction**
 In the highly competitive field of air transport management, passenger satisfaction plays a critical role in making customer loyalty, providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (Sadegh Eshaghi et al, 2024). While there are numerous studies held on factors influencing customer satisfaction like service quality (???Namukasa, 2023), it is very important to be able to predict the customer satisfaction with high accuracy for understanding how to improve and make better decisions. In this study, we aim to create a reliable predictive model that will predict US airline passenger satisfaction with high performance.
 
@@ -143,17 +145,11 @@ This preprocessing pipeline ensures the dataset is properly prepared for analysi
 
 ---
 
-## **Results and Interpretation**
+## **Results and Discussion**
 
 
 ---
 
-## **Conclusion**
-
-### **Summary**
-
-
-### **Limitations and Future Work**
 
 
 ---
