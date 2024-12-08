@@ -38,7 +38,7 @@ from sklearn.model_selection import GridSearchCV
 
 ```
 # **Summary**
-In this project, we created a classification model that uses a decision tree algorithm to predict airline customers satisfaction based on a variety of factors such as in-flight service quality, seat comfort, and demographic information. Customers were classified as either satisfied (positive ratings) or neutral/dissatisfied (negative ratings). Our final decision tree model performed well on an unknown test dataset, with an overall accuracy of 95.02%, a recall of 92.61%, a precision of 95.86%, and an F1-score of 94.21%.Based on the confusion matrix (Figure 5), the model correctly identified 24,683 cases while misclassifying 1,293 instances. There were 839 false negatives (satisfied consumers categorized as indifferent or dissatisfied), and 454 false positives (neutral or unsatisfied customers classified as satisfied). The imbalance between false negatives and false positives shows that the model favours overall accuracy while having slightly lesser sensitivity for spotting satisfied consumers.These findings show that the decision tree model accurately detects consumer satisfaction patterns, making it a useful tool for examining key aspects that influence satisfaction. However, the relatively high frequency of false negatives may lead to an underestimation of satisfied consumers, potentially leading in ineffective compensatory measures. Similarly, false positives may result in consumer unhappiness being disregarded. Despite these limitations, the model provides a solid foundation for customer satisfaction analysis and could be used as an effective decision-making tool by airlines. Future work should strive to improve the model's sensitivity and specificity while also validating its performance across a wide range of customer segments, aircraft routes, and service circumstances.
+In this project, we created a classification model that uses a decision tree algorithm to predict airline customers satisfaction based on a variety of factors such as in-flight service quality, seat comfort, and demographic information. Customers were classified as either satisfied (positive ratings) or neutral/dissatisfied (negative ratings). Our final decision tree model performed well on an unknown test dataset, with an overall accuracy of 95.02%, a recall of 92.61%, a precision of 95.86%, and an F1-score of 94.21%.Based on the confusion matrix (Figure 1), the model correctly identified 24,683 cases while misclassifying 1,293 instances. There were 839 false negatives (satisfied consumers categorized as indifferent or dissatisfied), and 454 false positives (neutral or unsatisfied customers classified as satisfied). The imbalance between false negatives and false positives shows that the model favours overall accuracy while having slightly lesser sensitivity for spotting satisfied consumers.These findings show that the decision tree model accurately detects consumer satisfaction patterns, making it a useful tool for examining key aspects that influence satisfaction. However, the relatively high frequency of false negatives may lead to an underestimation of satisfied consumers, potentially leading in ineffective compensatory measures. Similarly, false positives may result in consumer unhappiness being disregarded. Despite these limitations, the model provides a solid foundation for customer satisfaction analysis and could be used as an effective decision-making tool by airlines. Future work should strive to improve the model's sensitivity and specificity while also validating its performance across a wide range of customer segments, aircraft routes, and service circumstances.
 
 # **Introduction**
 In the highly competitive field of air transport management, passenger satisfaction plays a critical role in making customer loyalty, providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (Sadegh Eshaghi et al, 2024). While there are numerous studies held on factors influencing customer satisfaction like service quality (???Namukasa, 2023), it is very important to be able to predict the customer satisfaction with high accuracy for understanding how to improve and make better decisions. In this study, we aim to create a reliable predictive model that will predict US airline passenger satisfaction with high performance.
@@ -52,28 +52,7 @@ The dataset includes a variety of features such as:
 
 The goal is to predict the **passenger satisfaction** (either satisfied or dissatisfied) based on these features.
 
----
-
 ### **Data Exploration and Preprocessing**
-
-### **Data Validation**
-To ensure the integrity and quality of the dataset, a series of validation steps were performed:
-
-- **Correct Data File Format**: The data files were loaded in `.csv` format, compatible with Python's pandas library. The training and test datasets were successfully merged, with no inconsistencies in file format. The combined dataset consists of 129,880 rows and 24 columns. ??? 
-
-- **Correct Column Names**: The column names were standardized by converting them to lowercase and replacing spaces or dashes with underscores for consistency. A specific renaming step was applied to the 'departure/arrival_time_convenient' column, renaming it to 'time_convenient'.
-
-- **Empty Observations**: The dataset was checked for empty rows using a schema validation function. No empty rows were found, ensuring data completeness.
-
-- **Missingness**: Missing data was examined for each column. A threshold of 5% missing data per column was established. The 'arrival_delay_in_minutes' column had a minor amount of missing data (approximately 0.3%), which is within the acceptable range.
-
-- **Correct Data Types**: Each column's data type was validated to ensure consistency. All columns had the expected data types (e.g., integer for numerical columns, string for categorical variables). The target variable, 'satisfaction', was confirmed as a categorical variable.
-
-- **No Duplicate Observations**: Duplicates were checked based on the unique 'id' column and across all columns. No duplicates were found, indicating that each observation is unique.
-
-- **Outliers and Anomalous Values**: Each numerical column was checked for outliers and anomalous values. Variables such as 'flight_distance', 'age', and 'delay times' were inspected, with no extreme outliers detected. Range constraints for certain features were defined (e.g., 'age' should be between 0 and 100, 'flight_distance' should be positive).
-
-- **Correct Category Levels**: The categorical variables, such as 'customer_type', 'class', and 'satisfaction', were validated to ensure no incorrect category levels. The 'customer_type' column had a case mismatch ("disloyal customer"), which was corrected to "Disloyal Customer" for consistency.
 
 ### **Target Variable Analysis**
 
@@ -114,8 +93,6 @@ A heatmap visualization of the correlation matrix highlighted these relationship
 The EDA revealed that the target variable is slightly imbalanced, while many numerical variables are right-skewed and may require transformations. There is high correlation between certain features, suggesting redundancy, and no single feature strongly separates the target variable, indicating the need for more complex models. Missing values were addressed by removing redundant columns, and the dataset is now ready for further preprocessing and modeling.
 
 
----
-
 ### **Preprocessing**
 
  A feature was removed due to missing values and high correlation with another feature, making it redundant.
@@ -135,23 +112,17 @@ The EDA revealed that the target variable is slightly imbalanced, while many num
 This preprocessing pipeline ensures the dataset is properly prepared for analysis and modeling, with consistent scaling and encoding applied across the features.
 
 
-
----
-
 ## **Analysis**
 
 
 # **Results and Discussion**
-![Distribution of Customer Satisfaction Levels](../results/target_variable_distribution.png)
+To determine each feature's role in forecasting consumer satisfaction, we examined its correlations with the target variable.  No features showed significant correlation with satisfaction(Figure 2), which might result in near-perfect class separation, implying that satisfaction is impacted by numerous variables rather than just one. Many features were kept in the model because they provided unique information. However, multicollinearity was found between arrival_delay_in_minutes and departure_delay_in_minutes (correlation coefficient = 0.97, Figure 1). To solve this, we removed the arrival_delay_in_minutes feature, as both perhaps provided the same information.We chose the Decision Tree classifier since it outperformed alternative models, including Dummy and Logistic Regression, on all validation measures. The Decision Tree has the best validation_accuracy (94.5%) and validation_f1 (0.945), demonstrating an excellent balance of precision and recall.To further improve the decision tree, we used grid search with 10-fold cross-validation to optimize the max_depth hyperparameter, testing depths of 10, 12, 15, and 18.The ideal depth of 15 resulted in a mean cross-validation accuracy of 95.2%, which balanced model complexity and performance. While Decision Trees are prone to overfitting, rigorous hyperparameter tweaking reduced this problem, providing strong generalization on test data.
 
 ![Heatmap of Correlations Between Predictors for Airline Customer Satisfaction Dataset](../results/correlation_matrix.png)
 
-![Density Plots of Numeric Features by Customer Satisfaction Levels](../results/numeric_feat_target_plots.png)
-
 ![Distribution of Categorical Features Across Customer Satisfaction Levels](../results/cat_feat_target_plots.png)
 
+The resulting decision tree model performed well on the test dataset, with an overall accuracy of 95.0% and an F1-score of 94.2%. The confusion matrix (Figure 3) showed that the model successfully identified 24,683 of 25,976 samples. However, there were 839 false positives (satisfied customers misclassified as dissatisfied) and 454 false negatives (unsatisfied customers misclassified as satisfied). While the model is effective at identifying pleased customers, decreasing false negatives remains a top focus since they represent missed chances to boost customer retention.In the future, analyzing misclassifications may uncover trends or interactions that were previously undetected, leading to improved model performance. Testing ensemble approaches, such as Random Forest or Gradient Boosting, could help reduce overfitting and better leverage feature interactions. Including probabilistic outputs would allow stakeholders to assess prediction confidence levels, enabling more targeted interventions for high-risk consumers. Adjusting class weights in ensemble models could further minimize bias.
 ![Confusion Matrix for Customer Satisfaction Prediction Model On Test Data](../results/confusion_matrix.png)
-
-
+\newpage
 ## **References**
-
