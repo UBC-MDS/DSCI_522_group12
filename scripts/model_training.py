@@ -9,86 +9,13 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import make_scorer, precision_score, recall_score, f1_score, accuracy_score
 from pathlib import Path
 import sys
+import os
+import requests
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+from src.save_cv_results_plot import save_cv_results_plot
+from src.create_scorer import create_scorer
 
-def create_scorer(eval_metric, pos_label='satisfied'):
-    metrics = {
-        'precision': precision_score,
-        'recall': recall_score,
-        'f1': f1_score,
-        'accuracy': accuracy_score
-    }
-    
-    # If eval metric is not in metrics, raise a value error
-    if eval_metric not in metrics:
-        raise ValueError(f"Invalid metric name. Available metrics are {list(metrics.keys())}.")
-    
-    # Return the scorer
-    return make_scorer(metrics[eval_metric], pos_label=pos_label)
 
-def save_cv_results_plot(cv_results, eval_metric, plot_save_path):
-    # Get the parameters and their respective scores and standard deviations for both train and validation sets
-    parameters = cv_results["param_decisiontreeclassifier__max_depth"]
-    mean_validation_scores = cv_results["mean_val_score"]
-    mean_train_scores = cv_results["mean_train_score"]
-    validation_error = cv_results["se_val_score"]
-    train_error = cv_results["se_train_score"]
-
-    # Define the plot and its size
-    plt.figure(figsize=(8, 6))
-
-    # Plot the line plot of the mean scores for both sets
-    plt.plot(parameters, mean_validation_scores, color="black")
-    plt.plot(parameters, mean_train_scores, color="black")
-
-    # Plot the error bar for the validation scores
-    plt.errorbar(
-        parameters, mean_validation_scores, 
-        yerr=validation_error, 
-        fmt='o',  
-        ecolor='gray',  
-        elinewidth=1.5, 
-        capsize=4,
-        label=f"Mean Validation Score ({eval_metric.title()})"
-    )
-
-    plt.errorbar(
-        parameters, mean_train_scores, 
-        yerr=train_error, 
-        fmt='o',  
-        ecolor='gray',  
-        elinewidth=1.5, 
-        capsize=4,
-        label=f"Mean Validation Score ({eval_metric.title()})"
-    )
-
-    # Change the labels, add grid and change the xticks to match the hyperparameter values
-    plt.xlabel("Parameter Max Depth", fontsize=12)
-    plt.ylabel(eval_metric.title(), fontsize=12)
-    plt.title("Mean Validation Score with Error Bounds", fontsize=14)
-    plt.grid(True, linestyle='--', alpha=0.6)  
-    plt.xticks(list(parameters))
-
-    # Add a legend and tight layout
-    plt.legend()
-    plt.tight_layout()
-
-    # If the plot save path is not a Path class, make it
-    if not isinstance(plot_save_path, Path):
-        plot_save_path = Path(plot_save_path)
-
-    # If the path doesn't exist, create it
-    if not plot_save_path.exists():
-        plot_save_path.mkdir(parents=True, exist_ok=True)
-
-    # Define the file where the plot will be saved to
-    file_to_save = plot_save_path / 'cv_results_plot.png'
-
-    # Save the figure, close it
-    plt.savefig(file_to_save)
-    plt.close()
-
-    # Print about successful save
-    print(f"CV results plot saved in: \033[1m{file_to_save}\033[0m\n")
 
 
 @click.command()

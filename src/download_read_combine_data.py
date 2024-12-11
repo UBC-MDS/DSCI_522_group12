@@ -3,6 +3,18 @@ import kagglehub
 from pathlib import Path
 
 def download_read_combine_data(url, save_to, file_to, force_save=False):
+    """
+    Downloads a dataset from Kaggle, reads the train and test CSV files, 
+    combines them into a single dataset, and saves it to a specified directory.
+    Additionally, saves the train and test datasets separately in a 'raw' folder 
+    within the given directory.
+
+    Parameters:
+    - url (str): The URL or dataset identifier from Kaggle.
+    - save_to (str): The directory where the combined dataset will be saved.
+    - file_to (str): The name of the file to save the combined dataset.
+    - force_save (bool, optional): If True, will overwrite existing files. Defaults to False.
+    """
     # Try to download the dataset
     try:
         data_saved_path = Path(kagglehub.dataset_download(url))
