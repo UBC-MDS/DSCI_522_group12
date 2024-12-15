@@ -17,7 +17,7 @@ train_csv = test_dir / 'train.csv'
 test_csv = test_dir / 'test.csv'
 
 valid_url = "teejmahal20/airline-passenger-satisfaction"
-
+invalid_url = "invalid/url"
 
 @pytest.fixture(scope="module")
 def setup_data():
@@ -65,3 +65,18 @@ def test_download_and_combine(mock_download, setup_data):
     
     assert raw_train_file.exists(), "The raw train dataset was not created"
     assert raw_test_file.exists(), "The raw test dataset was not created"
+
+# Mock test case for invalid URL
+@patch('kagglehub.dataset_download')
+def test_download_and_combine_invalid_url(mock_download, setup_data):
+    # Mock the return value of the dataset download function
+    mock_download.return_value = str(test_dir)  # Mock the download path
+    
+    # Call the function to download, read, and combine data with an invalid URL
+    with pytest.raises(ValueError, match="Invalid URL or dataset not found"):
+        download_read_combine_data(
+            invalid_url,  
+            save_to=str(test_dir),
+            file_to="combined.csv",
+            force_save=True
+        )
