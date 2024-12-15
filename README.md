@@ -3,17 +3,27 @@ Authors: Hrayr Muradyan, Azin Piran, Sopuruchi Chisom, Shengjia Yu.
 
 # About
 
-In this project we try to predict US airline customer satisfaction based on several factors like: gender, age, travel class, etc.
+In this project we try to predict US airline customer satisfaction based on several factors.
 Understanding customer satisfaction is very important for airlines as it provides directions to improve the service and equipment. 
-The right improvement, subsequently, will translate to an increase in revenue. 
+Additionally, it will be easier to build customer loyalty. This is beneficial as loyal customers often promote the airline through 
+word-of-mouth or positive reviews, reducing the cost of acquiring new customers (Sadegh Eshaghi, 2024).  We developed a classification model using a decision tree algorithm to predict airline customer satisfaction having features like 
+in-flight service quality, seat comfort, and demographic information. Customers were categorized as either satisfied (positive rating) 
+or neutral/dissatisfied (negative rating). The decision tree model performed well on an unseen test dataset, demonstrating strong overall F1-score of 0.94.
 
-Additionally, it will be easier to build customer loyalty.
-This is essential as loyal customers often promote the airline through word-of-mouth or positive reviews, reducing the cost of acquiring new customers (Sadegh Eshaghi, 2024). 
+These results indicate that the decision tree model effectively detects patterns in customer satisfaction, making it a valuable tool for analyzing key factors that influence satisfaction. 
+While the results are very promising, there are several limitations of the project that should be addressed. 
+Firstly, the dataset contains only US airline observations which limits its usage to only US-based airline scenarios. 
+Secondly, the dataset is relatively old, being about 5 years old. The airline industry might have faced significant changes.
+Thirdly, collecting detailed information about customer experiences, such as seat comfort ratings, can be challenging. 
+And lastly, the exact method customer satisfaction was measured is unknown.
+Thus, for further research, a collection of a new data set involving international airlines and an exploration of alternative ways
+for quantifying subjective binary customer satisfaction is recommended.
 
-Thus, the reasons to conduct the this analysis are abundant. 
-<br/>The main question is: <b>can we accurately predict the customer satisfaction from the information we have? </b>
-
-The dataset we use to answer this question was sourced in Kaggle, posted by [@teejmahal20](https://www.kaggle.com/teejmahal20) (TJ Klein). It is important to note that the dataset was originally posted by [@johndddddd](https://www.kaggle.com/datasets/johndddddd/customer-satisfaction), which is then modified and cleaned by [@teejmahal20](https://www.kaggle.com/teejmahal20). The full dataset can be found [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction). Additionally, the dataset contains **only** US airline data, as mentioned in the original source.
+The dataset used to answer this question was sourced in Kaggle, posted by [@teejmahal20](https://www.kaggle.com/teejmahal20) (TJ Klein). 
+It is important to note that the dataset was originally posted by [@johndddddd](https://www.kaggle.com/datasets/johndddddd/customer-satisfaction), 
+which is then modified and cleaned by [@teejmahal20](https://www.kaggle.com/teejmahal20). 
+The full dataset can be found [here](https://www.kaggle.com/datasets/teejmahal20/airline-passenger-satisfaction). 
+Additionally, the dataset contains **only** US airline data, as mentioned in the original source.
 
 # Report
 
