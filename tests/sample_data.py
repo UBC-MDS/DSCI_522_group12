@@ -25,3 +25,30 @@ valid_sample_data = pd.DataFrame({
     "arrival_delay_in_minutes": [5.0, 0.0, 3.5, 7.5],
     "satisfaction": ["satisfied", "neutral or dissatisfied", "satisfied", "neutral or dissatisfied"]
 })
+
+
+invalid_sample_data = pd.DataFrame({
+    "gender": ["Male", "Female", "Unknown", "Male"],
+    "customer_type": ["Loyal Customer", "Disloyal Customer", "Loyal Customer", "Loyal Customer"],
+    "age": [200, -5, 50, 30],
+    "type_of_travel": ["Business travel", "Personal Travel", "Leisure", "Business travel"],
+    "class": ["Eco", "Eco Plus", "Luxury", "Business"],
+    "flight_distance": [-100, 100000, 500, 2000],
+    "inflight_wifi_service": [6, 10, 0, 4], 
+    "time_convenient": [-1, 7, 3, 6],  
+    "ease_of_online_booking": [10, 3, -2, 7],  
+    "gate_location": [-5, 10, 2, 3], 
+    "food_and_drink": [6, 8, 0, 9],  
+    "online_boarding": [9, 10, 1, 6],  
+    "seat_comfort": [10, 9, 1, 8],  
+    "inflight_entertainment": [10, 9, 0, 7],  
+    "on_board_service": [9, 10, 2, 8],  
+    "leg_room_service": [10, 9, 0, 7],  
+    "baggage_handling": [10, 9, 1, 8],  
+    "checkin_service": [9, 10, 2, 8],  
+    "inflight_service": [9, 10, 2, 8],  
+    "cleanliness": [10, 9, 1, 8],  
+    "departure_delay_in_minutes": [-10, 1000, 30, 0],  
+    "arrival_delay_in_minutes": [-10.0, 100.0, -5.0, 20.0],  
+    "satisfaction": ["neutral or dissatisfied", "satisfied", "angry", "satisfied"],
+})

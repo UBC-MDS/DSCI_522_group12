@@ -1,6 +1,7 @@
 from deepchecks.tabular.checks import FeatureLabelCorrelation, FeatureFeatureCorrelation
 from deepchecks.tabular import Dataset
 import pandera as pa
+import pandas as pd
 
 def check_duplicates(df):
     """
@@ -28,9 +29,13 @@ def check_duplicates(df):
     - The function uses `duplicated()` to detect duplicate rows and sums them to check for any duplicates.
 
     """
-    return not bool(df.drop('id', axis=1).duplicated().sum())
+    if 'id' in df.columns:
+        return not bool(df.drop('id', axis=1).duplicated().sum())
+    else:
+        return not bool(df.duplicated().sum())
+    
 
-def validate_data(df, missing_data_threshold):
+def validate_data(df, missing_data_threshold=0.2):
     """
     Validates the input dataframe against a predefined schema for data quality checks.
 
@@ -62,6 +67,15 @@ def validate_data(df, missing_data_threshold):
     - If any validation checks fail, an exception is raised with details about the failed checks.
 
     """
+    if not isinstance(df, pd.DataFrame):
+        raise TypeError("Variable 'df' must be a pandas DataFrame")    
+    if df.empty:
+        raise ValueError("Dataframe must contain observations.")
+    if not isinstance(missing_data_threshold, float):
+        raise TypeError("missing_data_threshold should be a float data type")
+    if (missing_data_threshold) < 0 or (missing_data_threshold) > 1:
+        raise ValueError("missing_data_threshold should be a value between 0 and 1")
+
     # Define the schema
     schema = pa.DataFrameSchema(
         {
@@ -96,11 +110,9 @@ def validate_data(df, missing_data_threshold):
         ])
 
     # Check the data with the above defined schema
-    try:
-        schema.validate(df, lazy=True)
-        print("Congratulations! Data validation passed!\n")
-    except pa.errors.SchemaErrors as e:
-        print(e.failure_cases)
+    schema.validate(df, lazy=True)
+    print("Congratulations! Data validation passed!\n")
+
 
 
 def validate_for_correlations(train_data, feature_target_threshold=0.92, feature_feature_threshold=0.9):
