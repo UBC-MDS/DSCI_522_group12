@@ -44,10 +44,14 @@ Future efforts should prioritize collecting a new dataset that includes internat
 
 # **Introduction**
 In the highly competitive field of air transport management, passenger satisfaction plays a critical role in making customer loyalty, 
-providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (@Eshaghi2024). 
+providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (@Eshaghi2024).
+Passenger satisfaction is typically a subjective measure reflecting how well an airline meets or exceeds customer expectations.
+It can be evaluated through various metrics, including binary classifications (e.g., satisfied vs. dissatisfied). 
 While there are numerous studies held on factors influencing customer satisfaction like service quality (@Namukasa2013), 
 it is very important to be able to predict the customer satisfaction with high accuracy for understanding how to improve and make better decisions. 
-This study aims to create a reliable predictive model that will predict US airline passenger satisfaction with high performance.
+This study aims to create a reliable binary classification model with high performance to distinguish between satisfied and dissatisfied customers.
+To achieve the goal we employ a comprehensive dataset which contains different features convering a variety of attributes such as
+flight information, passenger demographics, and service quality ratings.
 
 \newpage
 
