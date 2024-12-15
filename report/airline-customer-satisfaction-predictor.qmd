@@ -94,7 +94,7 @@ After examining the target distribution of the train dataset it was noticed that
 in the dataset than satisfied. The target distribution plot below (see @fig-target_variable_distribution) shows that the train dataset contains 58,830 dissatisfied
 observations and 45,074 satisfied observations.
 
-![Target variable distribution](../results/figures/target_variable_distribution.png){#fig-target_variable_distribution width=80%}
+![Target variable distribution.](../results/figures/target_variable_distribution.png){#fig-target_variable_distribution width=80%}
 
 To understand how different variables relate to the target variable and if they might be useful for prediction,
 multiple bivariate checks are done. Data visualization techniques are used to assess the relationship between exploratory variables and the target variable.
@@ -104,7 +104,7 @@ Additionally, customers on average are more satisfied with longer distances flig
 On the other hand, departure delay on average can have a bit negative effect on the satisfaction.
 See figure @fig-numeric_feat_target_plots for more insights.
 
-![Numerical features-target relationships](../results/figures/numeric_feat_target_plots.png){#fig-numeric_feat_target_plots width=100%}
+![The density distributions of numeric features against a binary target variable.](../results/figures/numeric_feat_target_plots.png){#fig-numeric_feat_target_plots width=100%}
 
 Count plots for categorical variables illustrated how to frequency of specific categories differed between
 satisfied and dissatisfied customers (See figure @fig-cat_feat_target_plots). Variables like seat comfort, leg room, cleanliness and inflight entertainment
@@ -113,7 +113,7 @@ but also serve as important predictors in the model. The clear association may h
 the class quite effectively.
 
 \newpage
-![Categorical features-target relationships](../results/figures/cat_feat_target_plots.png){#fig-cat_feat_target_plots width=100%}
+![The countplots of the categorical variables against a binary target variable.](../results/figures/cat_feat_target_plots.png){#fig-cat_feat_target_plots width=100%}
 
 The correlation matrix in Figure @fig-correlation_matrix is also examined to see if there are anomalous correlations (or multicollinearity) between 
 different exploratory variables. Particularly correlations higher than 0.9 were checked. 
@@ -121,7 +121,7 @@ It is important to note that the scaled dataset was used to compute the correlat
 While there are features that are correlated at some extent, none of them is critical. 
 Thus, no features are removed based on the correlations. 
 
-![Heatmap of correlations between numeric predictors](../results/figures/correlation_matrix.png){#fig-correlation_matrix width=100%}
+![Heatmap of correlations between numeric predictors.](../results/figures/correlation_matrix.png){#fig-correlation_matrix width=100%}
 
 ```{python}
 import pandas as pd
@@ -135,7 +135,7 @@ in the dataset. The figure @fig-cv_results_plot shows the performance of train a
 The best performing model was achieved using a max_depth of `{python} cv_results.loc[cv_results['mean_val_score'].idxmax(), 'param_decisiontreeclassifier__max_depth']`,
 balancing bias and variance effectively. The tuned model produced a robust predicting performance
 
-![Cross-validation results plot for different values of parameter max_depth](../results/figures/cv_results_plot.png){#fig-cv_results_plot width=80%}
+![Cross-validation results plot for different values of parameter max_depth.](../results/figures/cv_results_plot.png){#fig-cv_results_plot width=80%}
 
 Our model performed well on unseen, test data with impressive F1-score of `{python} test_scores_rounded.loc[0, 'F1-Score']`. 
 The classification report @tbl-classification_report shows the performance details even further. 
@@ -153,7 +153,7 @@ classification_report_rounded
 
 The results in the confusion matrix @fig-confusion_matrix shows how well it predicts each class.
 
-![Confusion matrix of the predictions of test data set](../results/figures/confusion_matrix.png){#fig-confusion_matrix width=80%}
+![Confusion matrix of the predictions of the test data set](../results/figures/confusion_matrix.png){#fig-confusion_matrix width=80%}
 
 The exact performance measures can be found in the table @tbl-test_scores which evaluate the performance of the model across variety of metrics
 including Accuracy, Recall, Precision and F1-Score.

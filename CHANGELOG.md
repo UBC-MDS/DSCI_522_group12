@@ -28,6 +28,28 @@
 **Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline_passenger_satisfaction_predictor.html
 **Commit:**
 
+### Change 5
+
+**Feedback:** "Please use 'Results' as the header - not 'Reporting Performance'. Also please include figure descriptions under your figures (should be 1-2 sentences to describe the figure for readers who only read the figure)."  
+**Change:** Results header is added. Meaningful figure descriptions are also added.
+**Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline_passenger_satisfaction_predictor.html
+**Commit:**
+
+### Change 6
+
+**Feedback:** "Can you mention some assumptions and limitations of the methods and your findings? Also, please reiterate some key findings in this part of your report."  
+**Change:** Limitations and assumptions, as well as key findings are added. 
+**Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline_passenger_satisfaction_predictor.html
+**Commit:**
+
+### Change 7
+
+**Feedback:** "If there are acronyms in your report, you should explain what they mean (ROC, SHAP, ...). Also try to avoid bullet points in your report."  
+**Change:** Acronyms are removed, instead, full titles are used. Unnecessary bullet points are also removed.
+**Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline_passenger_satisfaction_predictor.html
+**Commit:**
+
+
 
 
 
