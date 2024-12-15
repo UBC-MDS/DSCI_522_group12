@@ -49,6 +49,34 @@
 **Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline_passenger_satisfaction_predictor.html
 **Commit:**
 
+### Change 8
+
+**Feedback:** "For data validation checks, you throw errors for most checks, but for duplicates you are just printing a warning. The behaviour should be the same for all. -0.5
+The checks for anomalous correlations between features, and targets and features are just visual checks as far as I can see. They should be programatic and do something (like the pandera checks). 2 * -0.5"  
+**Change:** All checks now throw an error.
+**Link:** 
+**Commit:**
+
+### Change 9
+
+**Feedback:** "There was a typo which caused the volume mounting to be incorrect."  
+**Change:** The typo was corrected. Docker works fine.
+**Link:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/commit/e779ffb00ed022625d7bea7d0e3f9e315e12d35e
+**Commit:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/commit/e779ffb00ed022625d7bea7d0e3f9e315e12d35e
+
+### Change 10
+
+**Feedback:** "[Reviewer: Hui Tang]: While the decision tree model is clearly explained in terms of what it does, it would be helpful to justify why you chose a decision tree over other classification methods. A brief comparison or rationale would strengthen the methods section and showcase understanding of model selection criteria."  
+**Change:** Added justification why decision tree model was used in the Analysis section.
+**Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline_passenger_satisfaction_predictor.html
+**Commit:**
+
+
+
+### Other
+
+All other feedbacks were either not applicable to the final milestone or were not approved by our team to be a valid change.
+
 
 
 

@@ -82,8 +82,14 @@ OneHotEncoder for nominal categorical variables and MinMaxScaler for ordinal cat
 The dataset was initially split into train and test sets, which was combined and splitted to have control over the splitting strategy.
 Train dataset contained the 80% of the observations and the test set the rest 20%.
 Decision Tree Classifier was fitted to distinguish between satisfied and unsatisfied customers.
+Decision Trees are particularly easy to understand, interpret, and visualize, while effectively handling both numerical and categorical data. 
+Additionally, they can capture non-linear relationships, which make them the best option for different tasks.
+The selection of the algorithm also comes from the fact that among other simple models Decision Trees provided the best results.
+Thus, while decision trees do not require scaling because they split data based on feature thresholds rather than distance metrics, 
+the preprocessed data is intended for use with other models (e.g., SVM or logistic regression) that depend on scaling. 
+It ensures consistency across the pipeline and simplifies data management when experimenting with multiple algorithms.
 Variety of metrics were used to train the model and assess the model's performance.
-F1-score was used to tune the hyperparameters using Grid Search and cross-validation with 30-folds.
+F1-score was used to tune the hyperparameters using Grid Search and Cross-Validation with 30-folds.
 The Python programming language (@van1995python) is used for conducting the analysis using a variety of packages including
 but now limited to Pandas (@McKinney2010), scikit-learn (@Pedregosa2011) and matplotlib (@Hunter2007).
 
@@ -128,7 +134,7 @@ import pandas as pd
 cv_results = pd.read_csv("../results/tables/cv_results.csv")
 ```
 
-Adecision tree classifier was trained to achieve a nonlinear separation between the classes.
+A decision tree classifier was trained to achieve a nonlinear separation between the classes.
 To optimize the default model even further and limit the overfitting, the max_depth hyperparameter was tuned
 using a 30-fold cross-validation strategy. F1-Score was used as the metric for tuning to account for the small imbalance
 in the dataset. The figure @fig-cv_results_plot shows the performance of train and validation sets across different hyperparameter values.
