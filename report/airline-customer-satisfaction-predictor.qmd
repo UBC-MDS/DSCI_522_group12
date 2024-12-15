@@ -27,18 +27,19 @@ test_scores_rounded = test_scores.round(2)
 \newpage
 
 # **Summary**
-In this project, we developed a classification model using a decision tree algorithm to predict airline customer satisfaction based on various factors, 
-including in-flight service quality, seat comfort, and demographic information. 
-Customers were categorized as either satisfied (positive ratings) or neutral/dissatisfied (negative ratings). 
-Our decision tree model performed well on an unseen test dataset, demonstrating strong overall F1-score of `{python} test_scores_rounded.loc[0, 'F1-Score']`.
+This project develops a classification model using a decision tree algorithm to predict airline customer satisfaction based on various factors, 
+including in-flight service quality and customer demographic information. In this context, customer satisfaction refers to the overall experience and perception of the airline services by passengers. 
+The study aimed to categorize customers into two distinct groups: those who are satisfied (denoted as "satisfied") and those who are neutral or dissatisfied (denoted as "neutral or dissatisfied").
+The best decision tree model was evaluated on an unseen test dataset, demonstrating strong overall F1-score of `{python} test_scores_rounded.loc[0, 'F1-Score']`.
 
-These results indicate that the decision tree model effectively detects patterns in customer satisfaction,
+These results indicate that the model effectively detects patterns in customer satisfaction,
 making it a valuable tool for analyzing key factors that influence satisfaction. 
-However, the higher occurrence of false negatives may lead to an underestimation of satisfied customers, 
-potentially affecting the effectiveness of compensatory measures. Similarly, false positives could result in overlooking instances of dissatisfaction. 
-Despite these limitations, the model provides a reliable foundation for customer satisfaction analysis 
-and can serve as an effective decision-making tool for airlines. Future efforts should focus on improving the model's sensitivity and specificity, 
-as well as validating its performance across different customer segments, routes, and service scenarios.
+While the results are very promising, there are several limitations of the project that should be addressed. 
+Firstly, the dataset contains only US airline observations which limits its usage to only US-based airline scenarios. 
+Secondly, the dataset is relatively old, being about 5 years old. The airline industry might have faced significant changes.
+Thirdly, collecting detailed information about customer experiences, such as seat comfort ratings, can be challenging. 
+And lastly, the exact method customer satisfaction was measured is unknown.
+Future efforts should prioritize collecting a new dataset that includes international airlines, as well as exploring alternative methods for quantifying subjective customer satisfaction.
 
 
 # **Introduction**
@@ -46,7 +47,7 @@ In the highly competitive field of air transport management, passenger satisfact
 providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (@Eshaghi2024). 
 While there are numerous studies held on factors influencing customer satisfaction like service quality (@Namukasa2013), 
 it is very important to be able to predict the customer satisfaction with high accuracy for understanding how to improve and make better decisions. 
-In this study, we aim to create a reliable predictive model that will predict US airline passenger satisfaction with high performance.
+This study aims to create a reliable predictive model that will predict US airline passenger satisfaction with high performance.
 
 \newpage
 
@@ -58,7 +59,7 @@ combined_dataset = pd.read_csv("../data/combined_dataset.csv")
 ```
 
 ## **Dataset**
-The dataset we use to answer this question was sourced in Kaggle, posted by @Klein2020. 
+The dataset used to answer this question was sourced in Kaggle, posted by @Klein2020. 
 It is important to note that the dataset was originally posted by @johndddddd, 
 which is then modified and cleaned by @Klein2020. 
 Thought the exact origin of the dataset is unknown, it consists of **only** US airline data, as mentioned in the original source.
@@ -111,7 +112,7 @@ the class quite effectively.
 ![Categorical features-target relationships](../results/figures/cat_feat_target_plots.png){#fig-cat_feat_target_plots width=100%}
 
 The correlation matrix in Figure @fig-correlation_matrix is also examined to see if there are anomalous correlations (or multicollinearity) between 
-different exploratory variables. Particularly we checked for correlations higher than 0.9. 
+different exploratory variables. Particularly correlations higher than 0.9 were checked. 
 It is important to note that the scaled dataset was used to compute the correlation between numeric variables.
 While there are features that are correlated at some extent, none of them is critical. 
 Thus, no features are removed based on the correlations. 
@@ -123,7 +124,7 @@ import pandas as pd
 cv_results = pd.read_csv("../results/tables/cv_results.csv")
 ```
 
-We trained a decision tree classifier to achieve a nonlinear separation between the classes.
+Adecision tree classifier was trained to achieve a nonlinear separation between the classes.
 To optimize the default model even further and limit the overfitting, the max_depth hyperparameter was tuned
 using a 30-fold cross-validation strategy. F1-Score was used as the metric for tuning to account for the small imbalance
 in the dataset. The figure @fig-cv_results_plot shows the performance of train and validation sets across different hyperparameter values.
@@ -173,7 +174,7 @@ The airline industry might have faced significant changes, especially after COVI
 shift the customer expectations and factors affecting satisfaction.
 Thirdly, collecting detailed information about customer experiences, such as seat comfort ratings, can be challenging. 
 These subjective ratings are often difficult to obtain, especially on a large scale.
-Finally, we do not know how the customer satisfaction is measured, as different people have different expectations.
+Finally, the way customer satisfaction was measured is unknown, as different people have different expectations.
 To address this limitations, we suggest collecting a new data set involving international airlines. 
 Additionally, further research could explore alternative ways to quantify subjective binary customer satisfaction target.
 

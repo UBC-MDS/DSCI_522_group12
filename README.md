@@ -27,7 +27,7 @@ Additionally, the dataset contains **only** US airline data, as mentioned in the
 
 # Report
 
-The final report can be found: [here](https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/airline_passenger_satisfaction_predictor.html)
+The final report can be found: [here](https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline-customer-satisfaction-predictor.html)
 
 # Dependencies
 This project requires the following Python packages and versions:
