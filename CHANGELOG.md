@@ -71,13 +71,10 @@ The checks for anomalous correlations between features, and targets and features
 **Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline_passenger_satisfaction_predictor.html
 **Commit:**
 
-
-
 ### Other
 
 All other feedbacks were either not applicable to the final milestone or were not approved by our team to be a valid change.
 
+## Future Work
 
-
-
-
+- Add model interpretation analysis, mainly feature importances (Thanks Chaoyu Ou and all other reviewers for mentioning it).
