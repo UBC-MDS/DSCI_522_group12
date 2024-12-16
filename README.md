@@ -3,19 +3,18 @@ Authors: Hrayr Muradyan, Azin Piran, Sopuruchi Chisom, Shengjia Yu.
 
 # About
 
-In this project we try to predict US airline customer satisfaction based on several factors.
-Understanding customer satisfaction is very important for airlines as it provides directions to improve the service and equipment. 
-Additionally, it will be easier to build customer loyalty. This is beneficial as loyal customers often promote the airline through 
-word-of-mouth or positive reviews, reducing the cost of acquiring new customers (Sadegh Eshaghi, 2024).  We developed a classification model using a decision tree algorithm to predict airline customer satisfaction having features like 
-in-flight service quality, seat comfort, and demographic information. Customers were categorized as either satisfied (positive rating) 
-or neutral/dissatisfied (negative rating). The decision tree model performed well on an unseen test dataset, demonstrating strong overall F1-score of 0.94.
+This project aims to predict US airline customer satisfaction based on several factors.
 
-These results indicate that the decision tree model effectively detects patterns in customer satisfaction, making it a valuable tool for analyzing key factors that influence satisfaction. 
-While the results are very promising, there are several limitations of the project that should be addressed. 
-Firstly, the dataset contains only US airline observations which limits its usage to only US-based airline scenarios. 
-Secondly, the dataset is relatively old, being about 5 years old. The airline industry might have faced significant changes.
-Thirdly, collecting detailed information about customer experiences, such as seat comfort ratings, can be challenging. 
-And lastly, the exact method customer satisfaction was measured is unknown.
+**Customer Satisfaction** in this context refers to a passenger's level of contentment with their airline experience, encompassing factors such as in-flight amenities, operational performance, and overall flight experience. Customer satisfaction levels were compiled from passengers' survey responses and represented as a categorical variable with two distinct categories: neutral/dissatisfied, and satisfied.
+
+Understanding customer satisfaction is critical for airlines as it provides directions to improve the service and equipment. Additionally, it fosters building customer loyalty; this is beneficial as loyal customers often promote the airline through word-of-mouth or positive reviews, reducing the cost of acquiring new customers (Sadegh Eshaghi, 2024).  
+
+We developed a classification model using a decision tree algorithm to predict airline customer satisfaction using features like in-flight service quality, seat comfort, and demographic information. Customers were categorized as either satisfied (positive rating) or neutral/dissatisfied (negative rating). The decision tree model performed well on an unseen test dataset, demonstrating strong overall F1-score of 0.94.
+
+These results indicate that the decision tree model effectively detects patterns in customer satisfaction, making it a valuable tool for analyzing key factors that influence satisfaction. While the results are very promising, there are several limitations of the project that should be addressed. 
+
+Firstly, the dataset contains only US airline observations which limits its usage to only US-based airline scenarios. Secondly, the dataset is relatively old, being about 5 years old. The airline industry might have faced significant changes. Thirdly, collecting detailed information about customer experiences, such as seat comfort ratings, can be challenging. And lastly, the exact method customer satisfaction was measured is unknown.
+
 Thus, for further research, a collection of a new data set involving international airlines and an exploration of alternative ways
 for quantifying subjective binary customer satisfaction is recommended.
 
@@ -27,7 +26,8 @@ Additionally, the dataset contains **only** US airline data, as mentioned in the
 
 # Report
 
-The final report can be found: [here](https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/report/airline-customer-satisfaction-predictor.html)
+The final report can be found: [here](https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/airline_passenger_satisfaction_predictor.html)
+
 
 # Dependencies
 This project requires the following Python packages and versions:
@@ -40,9 +40,10 @@ For the recent versions of the dependencies, view the [environment file](https:/
 
 # Usage
 
-To run the analysis in the docker, please follow these steps:
+To run the analysis in a dedicated computational environment set up using Docker, please follow these steps:
 
 ### Step 1: Clone the repository
+Outlined are 2 options for cloning the repository- through https or ssh.
 
 > **Note:** The instructions contained in this section assume the commands are executed in a unix-based shell.
 
@@ -51,26 +52,27 @@ Using Https:
 git clone https://github.com/UBC-MDS/airline-customer-satisfaction-predictor.git
 ```
 
-Using SSH
+Using SSH:
 ```bash
 git clone git@github.com:UBC-MDS/airline-customer-satisfaction-predictor.git
 ```
 
-Then navigate to the root directory of the project 
-```bash
-cd <repo_directory>
-```
-
 ### Step 2: Setup Docker Computational Environment
-    
-```bash
-docker-compose up
-```
 
-- The terminal logs should display an output similar to: **Jupyter Server 2.14.2 is running at:**
-- Locate the URL starting with `http://127.0.0.1:8888/lab?token=` and click (or copy and paste in the browser) on the http address in the logs to access the Jupyter application from your web browser.
+1. **Navigate to the root directory of the project**: 
+    <br/>In the terminal/command line navigate to the root directory of your local copy of this project.
+    ```bash
+    cd <repo_directory>
+    ```
 
-Example link: `http://127.0.0.1:8888/lab?token=9f22c04a7fe732fdb2d2d98f1c2c0b74a89a5a6a1d60b45b`
+2. **Launch the docker container image for the computational environment**:
+
+    ```bash
+    docker-compose up
+    ```
+    - The terminal logs should display an output similar to: **Jupyter Server 2.14.2 is running at:**
+    - Locate the URL starting with `http://127.0.0.1:8888/lab?token=` and click (or copy and paste in the browser) on the http address in the logs to access the Jupyter application from your web browser.
+    <br/>Example link: `http://127.0.0.1:8888/lab?token=9f22c04a7fe732fdb2d2d98f1c2c0b74a89a5a6a1d60b45b`
     
 
 ### Step 3: Run the Analysis
@@ -90,6 +92,7 @@ Additionally, if you want to erase everything generated, you can run the followi
 ```bash
 make clean
 ```
+
 #### The second method
 
 Run the following commands in the root directoy of the project in the order provided:
