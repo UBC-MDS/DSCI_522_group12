@@ -1,4 +1,6 @@
-# all: 
+.PHONY: clean
+
+# all: report/airline-customer-satisfaction-predictor.html airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files
 
 # python scripts/data_download.py \
 #     --url="teejmahal20/airline-passenger-satisfaction" \
@@ -23,12 +25,29 @@
 #     --plot-save-path="./results/figures/" \
 #     --cv-results-save-path="./results/tables/"
 
-results/figures/tables/test_scores.csv results/tables/classification_report.csv results/figures/confusion_matrix.png: scripts/model_evaluation.py results/models/model_pipeline.pickle
+# model evaluation
+results/figures/tables/test_scores.csv results/tables/classification_report.csv results/figures/confusion_matrix.png: scripts/model_evaluation.py\
+results/models/model_pipeline.pickle
 	python scripts/model_evaluation.py \
         --pipeline="results/models/model_pipeline.pickle" \
         --test-path="data/raw/satisfaction_test.csv" \
         --results-to="results/tables/" \
         --plots-to="results/figures/"
+
+# report generation(html and pdf) and copy html to docs folder
+report/airline-customer-satisfaction-predictor.html airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files: results/tables/test_scores.csv\
+data/combined_dataset.csv\
+results/figures/target_variable_distribution.png\
+results/figures/numeric_feat_target_plots.png\
+results/figures/cat_feat_target_plots.png\
+results/figures/correlation_matrix.png\
+results/tables/cv_results.csv\
+results/figures/cv_results_plot.png\
+results/tables/classification_report.csv\
+results/figures/confusion_matrix.png
+	quarto render report/airline-customer-satisfaction-predictor.qmd --to html
+	quarto render report/airline-customer-satisfaction-predictor.qmd --to pdf
+	cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
 
 clean:
 	rm -rf results/figures/ \
