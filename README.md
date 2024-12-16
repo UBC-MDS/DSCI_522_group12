@@ -32,53 +32,19 @@ The final report can be found: [here](https://ubc-mds.github.io/airline-customer
 # Dependencies
 This project requires the following Python packages and versions:
 
-- **ipykernel**: Used for interactive computing in Jupyter notebooks.
-- **matplotlib**: A library for creating static, animated, and interactive visualizations in Python.
-- **numpy**: A package for numerical computing and handling arrays.
-- **pandas**: A powerful data manipulation and analysis library.
-- **python**: The programming language required to run the project.
-- **scikit-learn**: A library for machine learning algorithms and data mining.
-- **seaborn**: A Python visualization library based on matplotlib that provides a high-level interface for drawing attractive statistical graphics.
-- **conda-lock**: A tool for generating deterministic, reproducible conda environments.
-- **jupyterlab**: An Interactive Development Environment to write, debug, and test code.
-
+- [Docker](https://www.docker.com/): Consistent, reproducible containers.
+- [VS Code](https://code.visualstudio.com/download): Lightweight, versatile code editor.
+- [Jupyter Extension for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter): Interactive coding.
 
 For the recent versions of the dependencies, view the [environment file](https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/dsci522_environment.yml).
 
-### Installation using Conda Lock
-
-To ensure a reproducible environment with exact dependency versions, you can use the `conda-lock` file. Follow these steps to set up the environment using the lock file:
-
-#### Step 1: Install `conda-lock`
-
-First, make sure that `conda-lock` is installed on your system. If you don't have it installed, you can install it via Conda:
-
-```bash
-conda install conda-lock
-```
-#### Step 2: Install dependencies using the `conda-lock` file
-
-After `conda-lock` is installed, use the `conda-lock` file to install the environment. Run the following command in the directory containing the 'conda-lock.yml' file:
-
-```bash
-conda-lock install
-```
-#### Step 3: Create and activate the environment
-Once the dependencies are installed, create the environment using:
-
-```bash
-conda env create --file conda-lock.yml
-```
-Then, activate the environment:
-
-```bash
-conda activate <your-environment-name>
-```
-
 # Usage
-The steps below outline how to set up and run the analysis. 
+
+To run the analysis in the docker, please follow these steps:
 
 ### Step 1: Clone the repository
+
+> **Note:** The instructions contained in this section assume the commands are executed in a unix-based shell.
 
 Using Https:
 ```bash
@@ -90,30 +56,43 @@ Using SSH
 git clone git@github.com:UBC-MDS/airline-customer-satisfaction-predictor.git
 ```
 
+Then navigate to the root directory of the project 
+```bash
+cd <repo_directory>
+```
+
 ### Step 2: Setup Docker Computational Environment
-
-> **Note:** The instructions contained in this section assume the commands are executed in a unix-based shell.
     
-1. **Navigate to the root directory of the project**: 
-    - In the terminal/command line navigate to the root directory of your local copy of this project.
-    ```bash
-    cd <repo_directory>
-    ```
-2. **Launch the docker container image for the computational environment**:
+```bash
+docker-compose up
+```
 
-    ```bash
-    docker-compose up
-    ```
-    - The terminal logs should display an output similar to: **Jupyter Server 2.14.2 is running at:**
-    - Locate the URL starting with `http://127.0.0.1:8888/lab?token=` and click (or copy and paste in the browser) on the http address in the logs to access the Jupyter application from your web browser.
+- The terminal logs should display an output similar to: **Jupyter Server 2.14.2 is running at:**
+- Locate the URL starting with `http://127.0.0.1:8888/lab?token=` and click (or copy and paste in the browser) on the http address in the logs to access the Jupyter application from your web browser.
 
-    Example link: `http://127.0.0.1:8888/lab?token=9f22c04a7fe732fdb2d2d98f1c2c0b74a89a5a6a1d60b45b`
+Example link: `http://127.0.0.1:8888/lab?token=9f22c04a7fe732fdb2d2d98f1c2c0b74a89a5a6a1d60b45b`
     
-
 
 ### Step 3: Run the Analysis
 
-Open a terminal and run the following commands in the order provided:
+#### The first method (**Recommended**):
+
+In the root directory of the project run the following:
+
+```bash
+make all
+```
+
+The Makefile will run all the necessary files to generate the results and the report.
+This is the recommended option because it checks if all the dependencies have generated for each consecutive step.
+
+Additionally, if you want to erase everything generated, you can run the following:
+```bash
+make clean
+```
+#### The second method
+
+Run the following commands in the root directoy of the project in the order provided:
 
 ```bash
 python scripts/data_download.py \
@@ -149,7 +128,9 @@ quarto render report/airline-customer-satisfaction-predictor.qmd --to html
 quarto render report/airline-customer-satisfaction-predictor.qmd --to pdf
 ```
 
-Alternatively you can open the notebook `notebooks/terminal_commands_notebook.ipynb` and run all the cells in order which will execute all the commands mentioned above.
+#### The third option 
+
+The last option is to open the notebook `notebooks/terminal_commands_notebook.ipynb` and run all the cells in order which will execute all the commands mentioned above.
 
 ### Clean up
 To shut down the docker container and clean up the resources, interrupt the terminal by **Ctrl + C**. Then type:
