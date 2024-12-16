@@ -76,7 +76,7 @@ The checks for anomalous correlations between features, and targets and features
 **Feedback:** "[Reviewer: Hui Tang]: Additional Testing and Validation:
 The tests included are helpful, but expanding test coverage—particularly including tests for edge cases or ensuring all scripts run smoothly under unexpected input conditions—would increase confidence in the robustness of the analysis pipeline."  
 **Change:** Included robust test cases: for expected, error, and edge cases.  
-**Link:** 
+**Link:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/tree/main/tests  
 **Commit:**
 
 ### Change 12
