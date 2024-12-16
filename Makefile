@@ -3,14 +3,14 @@
 all: report/airline-customer-satisfaction-predictor.html report/airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files
 
 # Data Download Step
-data/raw/combined_dataset.csv: scripts/data_download.py
+data/combined_dataset.csv: scripts/data_download.py
 	python scripts/data_download.py \
     	--url="teejmahal20/airline-passenger-satisfaction" \
     	--save-to="./data/" \
     	--file-to="combined_dataset.csv"
 
 # Data Preparation Step
-data/processed/scaled_satisfaction_train.csv results/models/preprocessor.pickle: data/raw/combined_dataset.csv scripts/data_preparation.py
+data/processed/scaled_satisfaction_train.csv results/models/preprocessor.pickle: data/combined_dataset.csv scripts/data_preparation.py
 	python scripts/data_preparation.py \
     	--raw-data="./data/combined_dataset.csv" \
     	--test-size=0.2 \
@@ -58,8 +58,8 @@ results/figures/confusion_matrix.png
 	cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
 
 clean:
-	rm  data/raw/combined_dataset.csv
-	rm data/processed/scaled_satisfaction_train.csv \
+	rm  data/combined_dataset.csv
+	rm -rf data/processed \
 		results/models/preprocessor.pickle
 	rm -rf results/figures/ \
         results/tables/
