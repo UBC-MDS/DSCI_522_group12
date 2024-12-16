@@ -1,31 +1,6 @@
 .PHONY: clean
 
-all: report/airline-customer-satisfaction-predictor.html airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files
-
-# python scripts/data_download.py \
-#     --url="teejmahal20/airline-passenger-satisfaction" \
-#     --save-to="./data/" \
-#     --file-to="combined_dataset.csv"
-
-# python scripts/data_preparation.py \
-#     --raw-data="./data/combined_dataset.csv" \
-#     --test-size=0.2 \
-#     --data-to="./data/" \
-#     --preprocessor-to="./results/models/"
-
-# python scripts/eda.py \
-#     --train-data-path="./data/processed/scaled_satisfaction_train.csv" \
-#     --plot-to="./results/figures/"
-
-# python scripts/model_training.py \
-#     --preprocessor-path="./results/models/preprocessor.pickle" \
-#     --pipeline-to="./results/models/" \
-#     --train-path="./data/raw/satisfaction_train.csv" \
-#     --eval-metric="f1" \
-#     --plot-save-path="./results/figures/" \
-#     --cv-results-save-path="./results/tables/"
-
-
+all: report/airline-customer-satisfaction-predictor.html report/airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files
 
 # Data Download Step
 data/raw/combined_dataset.csv: scripts/data_download.py
@@ -48,8 +23,6 @@ results/figures/target_variable_distribution.png results/figures/numeric_feat_ta
     	--train-data-path="./data/processed/scaled_satisfaction_train.csv" \
     	--plot-to="./results/figures/"
 
-
-
 # Target to train a model and save the pipeline
 results/models/model_pipeline.pickle: results/models/preprocessor.pickle scripts/model_training.py data/raw/satisfaction_train.csv
 	python scripts/model_training.py \
@@ -59,7 +32,6 @@ results/models/model_pipeline.pickle: results/models/preprocessor.pickle scripts
     	--eval-metric="f1" \
     	--plot-save-path="./results/figures/" \
     	--cv-results-save-path="./results/tables/"
-
 
 # Model evaluation target
 results/tables/test_scores.csv results/tables/classification_report.csv results/figures/confusion_matrix.png: scripts/model_evaluation.py results/models/model_pipeline.pickle
@@ -71,11 +43,11 @@ results/tables/test_scores.csv results/tables/classification_report.csv results/
         --plots-to="results/figures/"
 
 # report generation(html and pdf) and copy html to docs folder
-report/airline-customer-satisfaction-predictor.html airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files: results/tables/test_scores.csv\
-data/combined_dataset.csv\
+report/airline-customer-satisfaction-predictor.html report/airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files: data/combined_dataset.csv\
 results/figures/target_variable_distribution.png\
 results/figures/numeric_feat_target_plots.png\
 results/figures/cat_feat_target_plots.png\
+results/tables/test_scores.csv\
 results/figures/correlation_matrix.png\
 results/tables/cv_results.csv\
 results/figures/cv_results_plot.png\
@@ -86,9 +58,11 @@ results/figures/confusion_matrix.png
 	cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
 
 clean:
+	rm  data/raw/combined_dataset.csv
+	rm data/processed/scaled_satisfaction_train.csv \
+		results/models/preprocessor.pickle
 	rm -rf results/figures/ \
-        results/tables/ \
-        data/raw/combined_dataset.csv \
-        data/processed/scaled_satisfaction_train.csv \
-        results/models/model_pipeline.pickle \
-        results/models/preprocessor.pickle
+        results/tables/
+	rm -rf report/airline-customer-satisfaction-predictor.html \
+        report/airline-customer-satisfaction-predictor.pdf \
+        report/airline-customer-satisfaction-predictor_files
