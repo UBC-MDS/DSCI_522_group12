@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import pickle
 from sklearn.metrics import precision_score, recall_score, f1_score,\
     accuracy_score, classification_report, confusion_matrix,\
     ConfusionMatrixDisplay
 from pathlib import Path
+
 
 def check_directory_exists(dir_path):
     """
@@ -99,11 +99,6 @@ def evaluate_model(y_obs, y_pred, results_to):
         - F-1 Score : the harmonic mean of precision and recall
     """
     # calculates model performance based on metrics
-    print("evaluate_model called.")
-    print(f"y_test: {y_obs}")
-    print(f"y_test_pred: {y_pred}")
-    print(f"results_to: {results_to}")
-
     scoring_metrics = pd.DataFrame({
         "Accuracy": [accuracy_score(y_obs, y_pred)],
         "Recall": [recall_score(y_obs, y_pred, pos_label = 'satisfied')],
@@ -119,52 +114,3 @@ def evaluate_model(y_obs, y_pred, results_to):
     class_report_save_path = results_to / "classification_report.csv"
     class_report.to_csv(class_report_save_path, index=False)
     print(f"Classification report saved in the directory: \033[1m{class_report_save_path}\033[0m\n")    
-
-
-def main(pipeline, test_path, results_to, plots_to):
-    """
-    Main function to evaluate a trained model on test data, save evaluation metrics,
-    and generate plots.
-
-    This function reads the test dataset, loads a pre-trained model pipeline, evaluates 
-    the model's performance on the test dataset, and saves the results (including metrics 
-    and plots) to the specified directories.
-    
-    Parameters
-    ----------
-    pipeline : str
-        File path to the pickled model pipeline to be evaluated.
-    test_path : str
-        File path to the testing dataset in CSV format.
-    results_to : str
-        Directory path where evaluation metrics and classification reports will be saved as CSV files.
-    plots_to : str
-        Directory path where evaluation plots will be saved.
-
-    Returns
-    -------
-    None
-        This function saves the plot to the directory without returning any value.
-    """
-
-    results_to = check_directory_exists(results_to)
-    plots_to = check_directory_exists(plots_to)
-
-    # Prepare the test set
-    test_data = pd.read_csv(test_path)
-    X_test = test_data.drop(columns=['satisfaction'])
-    y_test = test_data['satisfaction'].values.ravel()
-
-    # Predict and evaluate on the test set
-    final_model = pickle.load(open(pipeline, "rb"))
-    y_test_pred = final_model.predict(X_test)
-    evaluate_model(y_test, y_test_pred, results_to)
-    plot_save_confusion_matrix(y_test, y_test_pred, final_model, plots_to)
-
-
-if __name__ == "__main__":
-    try:
-        main()
-        print("Congratulations! Model Evaluation Done!")
-    except Exception as e:
-        print(f"The following error occurred: {e}")
