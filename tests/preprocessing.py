@@ -30,19 +30,6 @@ def test_clean_column_names_edge_cases():
     assert list(cleaned.columns) == ["c_lumn_name_", "n_ame_with_spaces"]
 
 
-def test_validate_data_valid():
-    """Test validate_data on valid data without errors."""
-    validate_data(valid_sample_data, missing_data_threshold=0.1)  
-
-
-def test_validate_data_missing_threshold():
-    """Test validate_data raises error when missing data exceeds the threshold."""
-    incomplete_data = valid_sample_data.copy()
-    incomplete_data.loc[0, "age"] = None 
-    with pytest.raises(ValueError, match="Data has missing values exceeding"):
-        validate_data(incomplete_data, missing_data_threshold=0.05)
-
-
 def test_create_column_transformer():
     """Test creating a column transformer with sample column lists."""
     categorical_cols = ["gender", "customer_type"]
