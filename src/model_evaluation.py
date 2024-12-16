@@ -1,8 +1,14 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.metrics import precision_score, recall_score, f1_score,\
-    accuracy_score, classification_report, confusion_matrix,\
-    ConfusionMatrixDisplay
+from sklearn.metrics import (
+    precision_score,
+    recall_score,
+    f1_score,
+    accuracy_score,
+    classification_report,
+    confusion_matrix,
+    ConfusionMatrixDisplay,
+)
 from pathlib import Path
 
 
@@ -23,13 +29,13 @@ def check_directory_exists(dir_path):
     path = Path(dir_path)
     if not path.exists():
         path.mkdir(parents=True, exist_ok=True)
-    
+
     return path
 
 
 def plot_save_confusion_matrix(y_obs, y_pred, model, plots_to):
     """
-    Creates a confusion matrix plot from observed and predicted values, 
+    Creates a confusion matrix plot from observed and predicted values,
     then saves the plot to the specified directory.
 
     Parameters
@@ -47,7 +53,7 @@ def plot_save_confusion_matrix(y_obs, y_pred, model, plots_to):
     -------
     None
         This function saves the plot to the directory without returning any value.
-    
+
     Notes
     -----
     - The confusion matrix is displayed with a "Blues" colormap for visual clarity.
@@ -56,7 +62,7 @@ def plot_save_confusion_matrix(y_obs, y_pred, model, plots_to):
     """
 
     # Check if the model has the `classes_` attribute
-    if not hasattr(model, 'classes_'):
+    if not hasattr(model, "classes_"):
         raise AttributeError(f"The model object is missing the 'classes_' attribute.")
 
     cm = confusion_matrix(y_obs, y_pred)
@@ -66,12 +72,14 @@ def plot_save_confusion_matrix(y_obs, y_pred, model, plots_to):
     plt.tight_layout()
     conf_matrix_save_path = plots_to / "confusion_matrix.png"
     disp.figure_.savefig(conf_matrix_save_path)
-    print(f"Confusion matrix saved in the directory: \033[1m{conf_matrix_save_path}\033[0m\n")
+    print(
+        f"Confusion matrix saved in the directory: \033[1m{conf_matrix_save_path}\033[0m\n"
+    )
 
 
 def evaluate_model(y_obs, y_pred, results_to):
     """
-    Evaluates the performance of a classification model using various metrics and 
+    Evaluates the performance of a classification model using various metrics and
     saves the evaluation results to the specified directory.
 
     Parameters
@@ -87,7 +95,7 @@ def evaluate_model(y_obs, y_pred, results_to):
     -------
     None
         This function saves the plot to the directory without returning any value.
-    
+
     Notes
     -----
     - Saves a CSV file named `test_scores.csv` containing the performance metrics.
@@ -99,18 +107,24 @@ def evaluate_model(y_obs, y_pred, results_to):
         - F-1 Score : the harmonic mean of precision and recall
     """
     # calculates model performance based on metrics
-    scoring_metrics = pd.DataFrame({
-        "Accuracy": [accuracy_score(y_obs, y_pred)],
-        "Recall": [recall_score(y_obs, y_pred, pos_label = 'satisfied')],
-        "Precision": [precision_score(y_obs, y_pred, pos_label = 'satisfied')],
-        "F1-Score": [f1_score(y_obs, y_pred, pos_label = 'satisfied')]
-    })
+    scoring_metrics = pd.DataFrame(
+        {
+            "Accuracy": [accuracy_score(y_obs, y_pred)],
+            "Recall": [recall_score(y_obs, y_pred, pos_label="satisfied")],
+            "Precision": [precision_score(y_obs, y_pred, pos_label="satisfied")],
+            "F1-Score": [f1_score(y_obs, y_pred, pos_label="satisfied")],
+        }
+    )
     test_scores_save_path = results_to / "test_scores.csv"
     scoring_metrics.to_csv(test_scores_save_path, index=False)
-    print(f"Test scores saved in the directory: \033[1m{test_scores_save_path}\033[0m\n")
+    print(
+        f"Test scores saved in the directory: \033[1m{test_scores_save_path}\033[0m\n"
+    )
 
     # Create a classification report and save it
     class_report = pd.DataFrame(classification_report(y_obs, y_pred, output_dict=True))
     class_report_save_path = results_to / "classification_report.csv"
     class_report.to_csv(class_report_save_path, index=False)
-    print(f"Classification report saved in the directory: \033[1m{class_report_save_path}\033[0m\n")    
+    print(
+        f"Classification report saved in the directory: \033[1m{class_report_save_path}\033[0m\n"
+    )
