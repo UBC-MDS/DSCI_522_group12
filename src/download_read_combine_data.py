@@ -22,6 +22,10 @@ def download_read_combine_data(url, save_to, file_to, force_save=False):
         print("The dataset link is invalid, please use kaggle's link 'teejmahal20/airline-passenger-satisfaction'")
     except:
         print("An unknown error occurred. Please try to provide 'teejmahal20/airline-passenger-satisfaction' as the link.")
+     # Check if the URL is valid
+    if not url.startswith('teejmahal20/'):  # Adjust this check based on the actual URL format
+        raise ValueError("Invalid URL or dataset not found")
+
     
     # Get the paths of the initial train and test sets
     train_data_path = data_saved_path / "train.csv"

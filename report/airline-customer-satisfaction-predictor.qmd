@@ -27,26 +27,31 @@ test_scores_rounded = test_scores.round(2)
 \newpage
 
 # **Summary**
-In this project, we developed a classification model using a decision tree algorithm to predict airline customer satisfaction based on various factors, 
-including in-flight service quality, seat comfort, and demographic information. 
-Customers were categorized as either satisfied (positive ratings) or neutral/dissatisfied (negative ratings). 
-Our decision tree model performed well on an unseen test dataset, demonstrating strong overall F1-score of `{python} test_scores_rounded.loc[0, 'F1-Score']`.
+This project develops a classification model using a decision tree algorithm to predict airline customer satisfaction based on various factors, 
+including in-flight service quality and customer demographic information. In this context, customer satisfaction refers to the overall experience and perception of the airline services by passengers. 
+The study aimed to categorize customers into two distinct groups: those who are satisfied (denoted as "satisfied") and those who are neutral or dissatisfied (denoted as "neutral or dissatisfied").
+The best decision tree model was evaluated on an unseen test dataset, demonstrating strong overall F1-score of `{python} test_scores_rounded.loc[0, 'F1-Score']`.
 
-These results indicate that the decision tree model effectively detects patterns in customer satisfaction,
+These results indicate that the model effectively detects patterns in customer satisfaction,
 making it a valuable tool for analyzing key factors that influence satisfaction. 
-However, the higher occurrence of false negatives may lead to an underestimation of satisfied customers, 
-potentially affecting the effectiveness of compensatory measures. Similarly, false positives could result in overlooking instances of dissatisfaction. 
-Despite these limitations, the model provides a reliable foundation for customer satisfaction analysis 
-and can serve as an effective decision-making tool for airlines. Future efforts should focus on improving the model's sensitivity and specificity, 
-as well as validating its performance across different customer segments, routes, and service scenarios.
+While the results are very promising, there are several limitations of the project that should be addressed. 
+Firstly, the dataset contains only US airline observations which limits its usage to only US-based airline scenarios. 
+Secondly, the dataset is relatively old, being about 5 years old. The airline industry might have faced significant changes.
+Thirdly, collecting detailed information about customer experiences, such as seat comfort ratings, can be challenging. 
+And lastly, the exact method customer satisfaction was measured is unknown.
+Future efforts should prioritize collecting a new dataset that includes international airlines, as well as exploring alternative methods for quantifying subjective customer satisfaction.
 
 
 # **Introduction**
 In the highly competitive field of air transport management, passenger satisfaction plays a critical role in making customer loyalty, 
-providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (@Eshaghi2024). 
+providing operational insights, enhancing financial performance, and ensuring compliance with regulations and rankings (@Eshaghi2024).
+Passenger satisfaction is typically a subjective measure reflecting how well an airline meets or exceeds customer expectations.
+It can be evaluated through various metrics, including binary classifications (e.g., satisfied vs. dissatisfied). 
 While there are numerous studies held on factors influencing customer satisfaction like service quality (@Namukasa2013), 
 it is very important to be able to predict the customer satisfaction with high accuracy for understanding how to improve and make better decisions. 
-In this study, we aim to create a reliable predictive model that will predict US airline passenger satisfaction with high performance.
+This study aims to create a reliable binary classification model with high performance to distinguish between satisfied and dissatisfied customers.
+To achieve the goal we employ a comprehensive dataset which contains different features convering a variety of attributes such as
+flight information, passenger demographics, and service quality ratings.
 
 \newpage
 
@@ -58,7 +63,7 @@ combined_dataset = pd.read_csv("../data/combined_dataset.csv")
 ```
 
 ## **Dataset**
-The dataset we use to answer this question was sourced in Kaggle, posted by @Klein2020. 
+The dataset used to answer this question was sourced in Kaggle, posted by @Klein2020. 
 It is important to note that the dataset was originally posted by @johndddddd, 
 which is then modified and cleaned by @Klein2020. 
 Thought the exact origin of the dataset is unknown, it consists of **only** US airline data, as mentioned in the original source.
@@ -77,8 +82,14 @@ OneHotEncoder for nominal categorical variables and MinMaxScaler for ordinal cat
 The dataset was initially split into train and test sets, which was combined and splitted to have control over the splitting strategy.
 Train dataset contained the 80% of the observations and the test set the rest 20%.
 Decision Tree Classifier was fitted to distinguish between satisfied and unsatisfied customers.
+Decision Trees are particularly easy to understand, interpret, and visualize, while effectively handling both numerical and categorical data. 
+Additionally, they can capture non-linear relationships, which make them the best option for different tasks.
+The selection of the algorithm also comes from the fact that among other simple models Decision Trees provided the best results.
+Thus, while decision trees do not require scaling because they split data based on feature thresholds rather than distance metrics, 
+the preprocessed data is intended for use with other models (e.g., SVM or logistic regression) that depend on scaling. 
+It ensures consistency across the pipeline and simplifies data management when experimenting with multiple algorithms.
 Variety of metrics were used to train the model and assess the model's performance.
-F1-score was used to tune the hyperparameters using Grid Search and cross-validation with 30-folds.
+F1-score was used to tune the hyperparameters using Grid Search and Cross-Validation with 30-folds.
 The Python programming language (@van1995python) is used for conducting the analysis using a variety of packages including
 but now limited to Pandas (@McKinney2010), scikit-learn (@Pedregosa2011) and matplotlib (@Hunter2007).
 
@@ -89,7 +100,7 @@ After examining the target distribution of the train dataset it was noticed that
 in the dataset than satisfied. The target distribution plot below (see @fig-target_variable_distribution) shows that the train dataset contains 58,830 dissatisfied
 observations and 45,074 satisfied observations.
 
-![Target variable distribution](../results/figures/target_variable_distribution.png){#fig-target_variable_distribution width=80%}
+![Target variable distribution.](../results/figures/target_variable_distribution.png){#fig-target_variable_distribution width=80%}
 
 To understand how different variables relate to the target variable and if they might be useful for prediction,
 multiple bivariate checks are done. Data visualization techniques are used to assess the relationship between exploratory variables and the target variable.
@@ -99,7 +110,7 @@ Additionally, customers on average are more satisfied with longer distances flig
 On the other hand, departure delay on average can have a bit negative effect on the satisfaction.
 See figure @fig-numeric_feat_target_plots for more insights.
 
-![Numerical features-target relationships](../results/figures/numeric_feat_target_plots.png){#fig-numeric_feat_target_plots width=100%}
+![The density distributions of numeric features against a binary target variable.](../results/figures/numeric_feat_target_plots.png){#fig-numeric_feat_target_plots width=100%}
 
 Count plots for categorical variables illustrated how to frequency of specific categories differed between
 satisfied and dissatisfied customers (See figure @fig-cat_feat_target_plots). Variables like seat comfort, leg room, cleanliness and inflight entertainment
@@ -108,29 +119,29 @@ but also serve as important predictors in the model. The clear association may h
 the class quite effectively.
 
 \newpage
-![Categorical features-target relationships](../results/figures/cat_feat_target_plots.png){#fig-cat_feat_target_plots width=100%}
+![The countplots of the categorical variables against a binary target variable.](../results/figures/cat_feat_target_plots.png){#fig-cat_feat_target_plots width=100%}
 
 The correlation matrix in Figure @fig-correlation_matrix is also examined to see if there are anomalous correlations (or multicollinearity) between 
-different exploratory variables. Particularly we checked for correlations higher than 0.9. 
+different exploratory variables. Particularly correlations higher than 0.9 were checked. 
 It is important to note that the scaled dataset was used to compute the correlation between numeric variables.
 While there are features that are correlated at some extent, none of them is critical. 
 Thus, no features are removed based on the correlations. 
 
-![Heatmap of correlations between numeric predictors](../results/figures/correlation_matrix.png){#fig-correlation_matrix width=100%}
+![Heatmap of correlations between numeric predictors.](../results/figures/correlation_matrix.png){#fig-correlation_matrix width=100%}
 
 ```{python}
 import pandas as pd
 cv_results = pd.read_csv("../results/tables/cv_results.csv")
 ```
 
-We trained a decision tree classifier to achieve a nonlinear separation between the classes.
+A decision tree classifier was trained to achieve a nonlinear separation between the classes.
 To optimize the default model even further and limit the overfitting, the max_depth hyperparameter was tuned
 using a 30-fold cross-validation strategy. F1-Score was used as the metric for tuning to account for the small imbalance
 in the dataset. The figure @fig-cv_results_plot shows the performance of train and validation sets across different hyperparameter values.
 The best performing model was achieved using a max_depth of `{python} cv_results.loc[cv_results['mean_val_score'].idxmax(), 'param_decisiontreeclassifier__max_depth']`,
 balancing bias and variance effectively. The tuned model produced a robust predicting performance
 
-![Cross-validation results plot for different values of parameter max_depth](../results/figures/cv_results_plot.png){#fig-cv_results_plot width=80%}
+![Cross-validation results plot for different values of parameter max_depth.](../results/figures/cv_results_plot.png){#fig-cv_results_plot width=80%}
 
 Our model performed well on unseen, test data with impressive F1-score of `{python} test_scores_rounded.loc[0, 'F1-Score']`. 
 The classification report @tbl-classification_report shows the performance details even further. 
@@ -148,7 +159,7 @@ classification_report_rounded
 
 The results in the confusion matrix @fig-confusion_matrix shows how well it predicts each class.
 
-![Confusion matrix of the predictions of test data set](../results/figures/confusion_matrix.png){#fig-confusion_matrix width=80%}
+![Confusion matrix of the predictions of the test data set](../results/figures/confusion_matrix.png){#fig-confusion_matrix width=80%}
 
 The exact performance measures can be found in the table @tbl-test_scores which evaluate the performance of the model across variety of metrics
 including Accuracy, Recall, Precision and F1-Score.
@@ -173,7 +184,7 @@ The airline industry might have faced significant changes, especially after COVI
 shift the customer expectations and factors affecting satisfaction.
 Thirdly, collecting detailed information about customer experiences, such as seat comfort ratings, can be challenging. 
 These subjective ratings are often difficult to obtain, especially on a large scale.
-Finally, we do not know how the customer satisfaction is measured, as different people have different expectations.
+Finally, the way customer satisfaction was measured is unknown, as different people have different expectations.
 To address this limitations, we suggest collecting a new data set involving international airlines. 
 Additionally, further research could explore alternative ways to quantify subjective binary customer satisfaction target.
 
