@@ -10,7 +10,7 @@ data/combined_dataset.csv: scripts/data_download.py
     	--file-to="combined_dataset.csv"
 
 # Data Preparation Step
-data/processed/scaled_satisfaction_train.csv results/models/preprocessor.pickle: data/combined_dataset.csv scripts/data_preparation.py
+data/processed/scaled_satisfaction_train.csv data/processed/scaled_satisfaction_test.csv results/models/preprocessor.pickle: data/combined_dataset.csv scripts/data_preparation.py
 	python scripts/data_preparation.py \
     	--raw-data="./data/combined_dataset.csv" \
     	--test-size=0.2 \
@@ -59,7 +59,8 @@ results/figures/confusion_matrix.png
 
 clean:
 	rm  data/combined_dataset.csv
-	rm -rf data/processed \
+	rm -rf data/raw \
+		data/processed \
 		results/models/preprocessor.pickle
 	rm -rf results/figures/ \
         results/tables/
