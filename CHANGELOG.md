@@ -8,7 +8,6 @@
 **Commit:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/commit/9d2d3e38471447abad8ab2687ec4fb3dec8145d8
 
 ### Change 2
-Hui Tang
 **Feedback:** "No Creative Commons license (for project report) was specified."  
 **Change:** Added the CC license for the project report in the License file.  
 **Link:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/LICENSE.md  
@@ -40,22 +39,20 @@ Hui Tang
 **Feedback:** "Can you mention some assumptions and limitations of the methods and your findings? Also, please reiterate some key findings in this part of your report."  
 **Change:** Limitations and assumptions, as well as key findings are added. 
 **Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/airline_passenger_satisfaction_predictor.html  
-**Commit:**
 
 ### Change 7
 
 **Feedback:** "If there are acronyms in your report, you should explain what they mean (ROC, SHAP, ...). Also try to avoid bullet points in your report."  
 **Change:** Acronyms are removed, instead, full titles are used. Unnecessary bullet points are also removed.  
 **Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/airline_passenger_satisfaction_predictor.html  
-**Commit:**
 
 ### Change 8
 
 **Feedback:** "For data validation checks, you throw errors for most checks, but for duplicates you are just printing a warning. The behaviour should be the same for all. -0.5
 The checks for anomalous correlations between features, and targets and features are just visual checks as far as I can see. They should be programatic and do something (like the pandera checks). 2 * -0.5"  
 **Change:** All checks now throw an error.  
-**Link:**   
-**Commit:**
+**Link:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/review-changes/src/data_validation_utils.py  
+
 
 ### Change 9
 
@@ -69,7 +66,6 @@ The checks for anomalous correlations between features, and targets and features
 **Feedback:** "[Reviewer: Hui Tang]: While the decision tree model is clearly explained in terms of what it does, it would be helpful to justify why you chose a decision tree over other classification methods. A brief comparison or rationale would strengthen the methods section and showcase understanding of model selection criteria."  
 **Change:** Added justification why decision tree model was used in the Analysis section.  
 **Link:** https://ubc-mds.github.io/airline-customer-satisfaction-predictor/docs/airline_passenger_satisfaction_predictor.html  
-**Commit:**
 
 ### Change 11
 
@@ -77,14 +73,12 @@ The checks for anomalous correlations between features, and targets and features
 The tests included are helpful, but expanding test coverage—particularly including tests for edge cases or ensuring all scripts run smoothly under unexpected input conditions—would increase confidence in the robustness of the analysis pipeline."  
 **Change:** Included robust test cases: for expected, error, and edge cases.  
 **Link:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/tree/main/tests  
-**Commit:**
 
 ### Change 12
 
 **Feedback:** No feedback.  
 **Change:** Updated the readme to include the make all and make clean commands. Removed unnecessary content.  
 **Link:** https://github.com/UBC-MDS/airline-customer-satisfaction-predictor/blob/main/README.md    
-**Commit:**
 
 ### Other
 
