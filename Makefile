@@ -1,6 +1,6 @@
 .PHONY: clean
 
-# all: report/airline-customer-satisfaction-predictor.html airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files
+all: report/airline-customer-satisfaction-predictor.html airline-customer-satisfaction-predictor.pdf report/airline-customer-satisfaction-predictor_files
 
 # python scripts/data_download.py \
 #     --url="teejmahal20/airline-passenger-satisfaction" \
@@ -25,9 +25,45 @@
 #     --plot-save-path="./results/figures/" \
 #     --cv-results-save-path="./results/tables/"
 
-# model evaluation
-results/figures/tables/test_scores.csv results/tables/classification_report.csv results/figures/confusion_matrix.png: scripts/model_evaluation.py\
-results/models/model_pipeline.pickle
+
+
+# Data Download Step
+data/raw/combined_dataset.csv: scripts/data_download.py
+	python scripts/data_download.py \
+    	--url="teejmahal20/airline-passenger-satisfaction" \
+    	--save-to="./data/" \
+    	--file-to="combined_dataset.csv"
+
+# Data Preparation Step
+data/processed/scaled_satisfaction_train.csv results/models/preprocessor.pickle: data/raw/combined_dataset.csv scripts/data_preparation.py
+	python scripts/data_preparation.py \
+    	--raw-data="./data/combined_dataset.csv" \
+    	--test-size=0.2 \
+    	--data-to="./data/" \
+    	--preprocessor-to="./results/models/"
+
+# Exploratory Data Analysis (EDA) Step
+results/figures/target_variable_distribution.png results/figures/numeric_feat_target_plots.png results/figures/cat_feat_target_plots.png results/figures/correlation_matrix.png: data/processed/scaled_satisfaction_train.csv scripts/eda.py
+	python scripts/eda.py \
+    	--train-data-path="./data/processed/scaled_satisfaction_train.csv" \
+    	--plot-to="./results/figures/"
+
+
+
+# Target to train a model and save the pipeline
+results/models/model_pipeline.pickle: results/models/preprocessor.pickle scripts/model_training.py data/raw/satisfaction_train.csv
+	python scripts/model_training.py \
+    	--preprocessor-path="./results/models/preprocessor.pickle" \
+    	--pipeline-to="./results/models/" \
+    	--train-path="./data/raw/satisfaction_train.csv" \
+    	--eval-metric="f1" \
+    	--plot-save-path="./results/figures/" \
+    	--cv-results-save-path="./results/tables/"
+
+
+# Model evaluation target
+results/tables/test_scores.csv results/tables/classification_report.csv results/figures/confusion_matrix.png: scripts/model_evaluation.py results/models/model_pipeline.pickle
+	# Run the model evaluation script
 	python scripts/model_evaluation.py \
         --pipeline="results/models/model_pipeline.pickle" \
         --test-path="data/raw/satisfaction_test.csv" \
@@ -51,4 +87,8 @@ results/figures/confusion_matrix.png
 
 clean:
 	rm -rf results/figures/ \
-        results/tables/
+        results/tables/ \
+        data/raw/combined_dataset.csv \
+        data/processed/scaled_satisfaction_train.csv \
+        results/models/model_pipeline.pickle \
+        results/models/preprocessor.pickle
