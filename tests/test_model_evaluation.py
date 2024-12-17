@@ -5,7 +5,7 @@ from unittest.mock import MagicMock
 import sys
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from src.model_evaluation import check_directory_exists, plot_save_confusion_matrix, evaluate_model, main
+from src.model_evaluation import check_directory_exists, plot_save_confusion_matrix, evaluate_model
 from sample_data import valid_sample_data
 
 
@@ -19,14 +19,14 @@ def tmp_dir(tmp_path):
 def dummy_model():
     """Fixture for creating a mock model with `classes_` attribute."""
     model = MagicMock()
-    model.classes_ = ['dissatisfied', 'satisfied', 'neutral or dissatisfied']
+    model.classes_ = ['satisfied', 'neutral or dissatisfied']
     return model
 
 @pytest.fixture
 def dummy_data():
     """Fixture for creating dummy observed and predicted data."""
-    y_obs = pd.Series(['satisfied', 'dissatisfied', 'neutral or dissatisfied', 'satisfied', 'satisfied'])
-    y_pred = pd.Series(['satisfied', 'satisfied', 'satisfied', 'dissatisfied', 'neutral or dissatisfied'])
+    y_obs = pd.Series(['satisfied', 'neutral or dissatisfied', 'satisfied', 'satisfied'])
+    y_pred = pd.Series(['satisfied', 'satisfied', 'satisfied', 'neutral or dissatisfied'])
     return y_obs, y_pred
 
 
@@ -87,7 +87,7 @@ def test_plot_save_confusion_matrix_missing_classes(dummy_data, tmp_dir):
     """Test when the model has target and `classes_` attribute mismatch"""
     y_obs, y_pred = dummy_data
     incomplete_model = MagicMock()
-    incomplete_model.classes_ = ['dissatisfied', 'satisfied']
+    incomplete_model.classes_ = ['satisfied']
     with pytest.raises(ValueError):
         plot_save_confusion_matrix(y_obs, y_pred, incomplete_model, tmp_dir)
 
