@@ -55,7 +55,7 @@ results/tables/classification_report.csv\
 results/figures/confusion_matrix.png
 	quarto render report/airline-customer-satisfaction-predictor.qmd --to html
 	quarto render report/airline-customer-satisfaction-predictor.qmd --to pdf
-	cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
+	mkdir -p docs && cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
 
 clean:
 	rm  data/combined_dataset.csv
