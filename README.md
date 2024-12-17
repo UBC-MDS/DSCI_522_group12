@@ -129,7 +129,9 @@ python scripts/model_evaluation.py \
 
 quarto render report/airline-customer-satisfaction-predictor.qmd --to html
 quarto render report/airline-customer-satisfaction-predictor.qmd --to pdf
-mkdir -p docs && cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
+mkdir -p docs
+cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
+cp -r report/airline-customer-satisfaction-predictor_files docs/airline-customer-satisfaction-predictor_files
 ```
 
 #### The third option 

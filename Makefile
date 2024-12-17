@@ -55,13 +55,17 @@ results/tables/classification_report.csv\
 results/figures/confusion_matrix.png
 	quarto render report/airline-customer-satisfaction-predictor.qmd --to html
 	quarto render report/airline-customer-satisfaction-predictor.qmd --to pdf
-	mkdir -p docs && cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
+	mkdir -p docs
+	cp report/airline-customer-satisfaction-predictor.html docs/airline_passenger_satisfaction_predictor.html
+	cp -r report/airline-customer-satisfaction-predictor_files docs/airline-customer-satisfaction-predictor_files
 
 clean:
 	rm  data/combined_dataset.csv
 	rm -rf data/raw \
 		data/processed \
-		results/models/preprocessor.pickle
+		results/models/preprocessor.pickle \
+		results/models/model_pipeline.pickle \
+		results/models/
 	rm -rf results/figures/ \
         results/tables/
 	rm -rf report/airline-customer-satisfaction-predictor.html \
